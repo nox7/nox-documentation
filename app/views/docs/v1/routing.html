@@ -88,7 +88,7 @@
 			<code>
 				#[Route("GET", "/\/forum\/post\/(?<threadID>\d+)/", true)]
 				public function threadView(): string{
-					header("content-type: text/html; charset=utf8");
+					header("content-type: text/html; charset=utf-8");
 
 					// Fetch the named capture group
 					$threadID = (int) $_GET['threadID'];
@@ -121,7 +121,7 @@
 					// This route will now only match /api/v1/ (or /api/v1)
 					#[Route("GET", "/")]
 					public function homeView(): string{
-						header("content-type: text/html; charset=utf8");
+						header("content-type: text/html; charset=utf-8");
 
 						return "Home page";
 					}
