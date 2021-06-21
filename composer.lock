@@ -1,0 +1,59 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "bc0b1bb5546214687f9b5ab17e8d8157",
+    "packages": [
+        {
+            "name": "nox7/nox",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nox7/nox.git",
+                "reference": "f177cd709d343675667c30f77e8371db925a44c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nox7/nox/zipball/f177cd709d343675667c30f77e8371db925a44c5",
+                "reference": "f177cd709d343675667c30f77e8371db925a44c5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nox\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Nox7",
+                    "email": "nox7@animetavern.com"
+                }
+            ],
+            "description": "A straightforward and dependency-light web framework with minimal syntax learning curves.",
+            "support": {
+                "issues": "https://github.com/nox7/nox/issues",
+                "source": "https://github.com/nox7/nox/tree/1.2.2"
+            },
+            "time": "2021-06-21T14:38:56+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
+}
