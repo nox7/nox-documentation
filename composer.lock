@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a9a6449871ab914b3d64eefb47c53d8",
+    "content-hash": "98c5adef2a9c984f3560c57f4dea5e7b",
     "packages": [
         {
             "name": "nox7/nox",

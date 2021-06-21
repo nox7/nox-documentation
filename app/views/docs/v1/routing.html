@@ -1,0 +1,157 @@
+@Layout = "base.php"
+@Head{
+<title>Routing - Nox PHP Framework</title>
+}
+@Body{
+<main>
+	<h1>Routing with Attributes</h1>
+	<p>
+		Nox utilizes the PHP attributes introduced in PHP version 8 to route requests to the proper class and method.
+	</p>
+	<p>
+		The Nox configuration file will tell the framework which directory to parse MVC controllers in. By default, it is the /controllers directory of your project directory.
+	</p>
+
+	<table-of-contents>
+		<toc-title>Table of Contents</toc-title>
+		<group>
+			<a href="#setting-up-a-controller-class">Setting Up a Controller Class</a>
+			<group>
+				<a href="#regular-expression-routes">Regular Expressions and Routes</a>
+			</group>
+			<a href="#routes-with-a-common-base">Routes With a Common Base</a>
+			<group>
+				<a href="#route-bases-with-regular-expressions">Route Bases With Regular Expressions</a>
+			</group>
+		</group>
+	</table-of-contents>
+
+	<h2 id="setting-up-a-controller-class">Setting Up a Controller Class</h2>
+	<p>
+		Because your request handler (by default, the nox-request.php file in your project's directory) requires the autoload.php file, you do not need to require the Nox framework components in the controllers.
+	</p>
+	<pre class="language-php line-numbers">
+		<code>
+			&lt;?php
+				use Nox\Router\Attributes\Route;
+				use Nox\Router\BaseController;
+
+				class HomeController extends BaseController{
+
+				}
+			?&gt;
+		</code>
+	</pre>
+	<p>
+		All of your controller classes will extend the <code class="language-php">BaseController</code>.
+	</p>
+	<p>
+		To add a method which will display content, use the <code class="language-php">#[Route()]</code> attribute on any <strong>public</strong> method in your controller class.
+	</p>
+	<pre class="language-php line-numbers">
+		<code>
+			&lt;?php
+				use Nox\Router\Attributes\Route;
+				use Nox\Router\BaseController;
+
+				class HomeController extends BaseController{
+
+					#[Route("GET", "/")]
+					public function homeView(): string{
+						header("content-type: text/html; charset=utf8");
+
+						return "Home page";
+					}
+
+				}
+			?&gt;
+		</code>
+	</pre>
+	<p>
+		The <code class="language-php">homeView()</code> method is now routed to the home page. Visiting your home page will now output "Home page".
+	</p>
+	<p>
+		The name of your public methods do not matter to Nox. You can name your classes and methods however you'd like as long as the class file is in your project's controllers directory they will be loaded. <strong>Sub-folders are allowed in the controllers directory and are recursively parsed.</strong>
+	</p>
+	<p>
+		Route <strong>is a repeatable</strong> attribute and you can define multiple routes on a controller class method.
+	</p>
+	<content-group>
+		<h3 id="regular-expression-routes">Regular Expressions and Routes</h3>
+		<p>
+			You can use PHP's standard PCRE library in your routes. Additionally, named capture groups will be injected into the <code class="language-php">$_GET</code> superglobal
+		</p>
+		<p>
+			Below shows only a method (inside a controller class) with a route using the regular expression flag (third argument of <code class="language-php">#[Route()]</code> to capture a forum post route.
+		</p>
+		<pre class="language-php line-numbers">
+			<code>
+				#[Route("GET", "/\/forum\/post\/(?<threadID>\d+)/", true)]
+				public function threadView(): string{
+					header("content-type: text/html; charset=utf8");
+
+					// Fetch the named capture group
+					$threadID = (int) $_GET['threadID'];
+
+					return "$threadID";
+				}
+			</code>
+		</pre>
+	</content-group>
+
+	<h2 id="routes-with-a-common-base">Routes With a Common Base</h2>
+	<p>
+		In instances where many of your route methods have a common base, you can define the class-specific attribute <code class="language-php">#[RouteBase()]</code> <strong>on the class</strong> the methods are a part of.
+	</p>
+	<p>
+		Adding this attribute to your controller class will force all of the routes on the methods of the class to be prepended with the base defined in the route.
+	</p>
+	<p>
+		In the example below, all routes will only match if <em>/api/v1</em> comes before them.
+	</p>
+	<pre class="language-php line-numbers">
+		<code>
+			&lt;?php
+				use Nox\Router\Attributes\Route;
+				use Nox\Router\BaseController;
+
+				#[RouteBase("/api/v1")]
+				class HomeController extends BaseController{
+
+					// This route will now only match /api/v1/ (or /api/v1)
+					#[Route("GET", "/")]
+					public function homeView(): string{
+						header("content-type: text/html; charset=utf8");
+
+						return "Home page";
+					}
+
+				}
+			?&gt;
+		</code>
+	</pre>
+	<p>
+		RouteBase <strong>is a repeatable</strong> attribute and you can define multiple bases on a controller class.
+	</p>
+
+	<content-group>
+		<h3 id="route-bases-with-regular-expressions">Route Bases With Regular Expressions</h3>
+		<p>
+			Similarly to method routes, you can define a <code class="language-php">#[RouteBase()]</code> as a regular expression capture. The named capture groups will be injected into the <code class="language-php">$_GET</code> superglobal - just like method Routes with named regular expression capture groups.
+		</p>
+		<pre class="language-php line-numbers">
+			<code>
+				&lt;?php
+					use Nox\Router\Attributes\Route;
+					use Nox\Router\BaseController;
+
+					#[RouteBase("/\/api\/v1\/(?<pageName>[^\/])/", true)]
+					class HomeController extends BaseController{
+
+					// And so on...
+					// pageName is accessible in the $_GET['pageName'] index on any method.
+			</code>
+		</pre>
+	</content-group>
+</main>
+}

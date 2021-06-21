@@ -1,0 +1,31 @@
+page-container > aside{
+	background-color:rgb(60,60,60);
+	width:240px;
+	min-width:240px;
+}
+
+.logo-container{
+	text-align:center;
+	padding:25px 1rem;
+}
+
+link-group{
+	display:block;
+}
+
+link-wrap{
+	a{
+		display:block;
+		text-decoration:none;
+		padding:0.5rem 2rem;
+		font-size:1.1rem;
+		color:white;
+
+		&:hover{
+			transition:background-color 100ms;
+			background-color:purple;
+			text-decoration:none;
+			color:white;
+		}
+	}
+}

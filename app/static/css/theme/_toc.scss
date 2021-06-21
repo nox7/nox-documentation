@@ -1,0 +1,24 @@
+table-of-contents{
+	display:block;
+	width:400px;
+	background-color:rgb(240,240,245);
+	border:1px solid gray;
+	padding:1rem;
+	margin:1.5rem 0;
+
+	toc-title{
+		font-size:1.75rem;
+		color:rgb(50,50,50);
+		display:block;
+		margin-bottom:0.5rem;
+	}
+
+	group{
+		display:block;
+		padding-left:1em;
+		a{
+			display:inline-block;
+			text-decoration:underline;
+		}
+	}
+}
