@@ -86,7 +86,7 @@
 		</p>
 		<pre class="language-php line-numbers">
 			<code>
-				#[Route("GET", "/\/forum\/post\/(?<threadID>\d+)/", true)]
+				#[Route("GET", "/\/forum\/post\/(?&lt;threadID&gt;\d+)/", true)]
 				public function threadView(): string{
 					header("content-type: text/html; charset=utf-8");
 
@@ -145,7 +145,7 @@
 					use Nox\Router\Attributes\Route;
 					use Nox\Router\BaseController;
 
-					#[RouteBase("/\/api\/v1\/(?<pageName>[^\/])/", true)]
+					#[RouteBase("/\/api\/v1\/(?&lt;pageName&gt;[^\/])/", true)]
 					class HomeController extends BaseController{
 
 					// And so on...
