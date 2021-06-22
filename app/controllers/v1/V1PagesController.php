@@ -21,4 +21,9 @@
 		public function layoutsView(): string{
 			return Renderer::renderView("docs/v1/layouts.html");
 		}
+
+		#[Route("GET", "/views")]
+		public function viewsView(): string{
+			return Renderer::renderView("docs/v1/views.html");
+		}
 	}
