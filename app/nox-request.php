@@ -1,7 +1,7 @@
 <?php
 	require_once __DIR__ . "/../vendor/autoload.php";
 
-	$requestPath = $_GET['requestPath'];
+	$requestPath = parse_url($_SERVER['REQUEST_URI'])['path'];
 	$requestMethod = $_SERVER['REQUEST_METHOD'];
 
 	// Load the router
