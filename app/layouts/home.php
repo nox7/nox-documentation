@@ -1,3 +1,7 @@
+<?php
+	/** @var string $htmlHead */
+	/** @var string $htmlBody */
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
@@ -9,6 +13,7 @@
 		<?= $htmlHead ?>
 	</head>
 	<body>
+		<?php include __DIR__ . "/../views/_partials/home-nav.html"; ?>
 		<page-container>
 			<?= $htmlBody ?>
 		</page-container>
