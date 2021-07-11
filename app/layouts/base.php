@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="/css/theme/main.css">
 		<link rel="stylesheet" href="/external/prism/prism.css">
 		<script defer src="/external/prism/prism.js"></script>
+		<?php include __DIR__ . "/../views/_partials/_global-head.html"; ?>
 		<?= $htmlHead ?>
 	</head>
 	<body>
