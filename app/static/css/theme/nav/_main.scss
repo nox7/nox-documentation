@@ -1,3 +1,5 @@
+@import "search";
+
 #home-nav{
 	display:flex;
 	height:$home-nav-height;
@@ -24,4 +26,10 @@
 			background-color:purple;
 		}
 	}
+}
+
+.search-container{
+	display:flex;
+	justify-content: flex-end;
+	flex-grow:1;
 }

@@ -1,0 +1,30 @@
+$top-nav-search-input-color:rgb(100,100,100);
+
+#home-top-search{
+	display:flex;
+	align-items:center;
+	padding-right:35px;
+}
+
+#home-top-search-field-container{
+	display:inline-flex;
+	color:$top-nav-search-input-color;
+	align-items:center;
+	border-bottom: 1px solid $top-nav-search-input-color;
+
+	label{
+		padding-right:8px;
+	}
+
+	input {
+		background: none;
+		border:none;
+		font-size:1.15rem;
+		color:$top-nav-search-input-color;
+		width:300px;
+
+		&:focus, &:active{
+			outline:none;
+		}
+	}
+}
