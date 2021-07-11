@@ -7,6 +7,11 @@
 	#[RouteBase("/docs/1.x")]
 	class V1PagesController extends BaseController{
 
+		#[Route("GET", "/")]
+		public function versionHome(): string{
+			return Renderer::renderView("docs/v1/home.html");
+		}
+
 		#[Route("GET", "/routing")]
 		public function routeView(): string{
 			return Renderer::renderView("docs/v1/routing.html");
