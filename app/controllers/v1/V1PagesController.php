@@ -31,4 +31,9 @@
 		public function viewsView(): string{
 			return Renderer::renderView("docs/v1/views.html");
 		}
+
+		#[Route("GET", "/orm")]
+		public function ormView(): string{
+			return Renderer::renderView("docs/v1/orm.html");
+		}
 	}
