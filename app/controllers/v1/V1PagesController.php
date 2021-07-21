@@ -12,6 +12,11 @@
 			return Renderer::renderView("docs/v1/home.html");
 		}
 
+		#[Route("GET", "/quick-start")]
+		public function quickStart(): string{
+			return Renderer::renderView("docs/v1/quick-start.html");
+		}
+
 		#[Route("GET", "/routing")]
 		public function routeView(): string{
 			return Renderer::renderView("docs/v1/routing.html");
