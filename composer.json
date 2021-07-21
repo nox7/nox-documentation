@@ -1,7 +1,8 @@
 {
     "require": {
         "php": ">=8.0",
-        "nox7/nox": "*"
+        "nox7/nox": "*",
+      "ext-simplexml": "*"
     },
     "minimum-stability": "beta"
 }
