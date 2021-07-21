@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98c5adef2a9c984f3560c57f4dea5e7b",
+    "content-hash": "23eb7f7e9c271dadc658569a46906f36",
     "packages": [
         {
             "name": "nox7/nox",
-            "version": "1.3.1",
+            "version": "1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nox7/nox.git",
-                "reference": "055d863eaed1a0a9954fea735ee718a39c7dee7c"
+                "reference": "d64a5ca0391eec1feb5bfc649956bb12f050db90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nox7/nox/zipball/055d863eaed1a0a9954fea735ee718a39c7dee7c",
-                "reference": "055d863eaed1a0a9954fea735ee718a39c7dee7c",
+                "url": "https://api.github.com/repos/nox7/nox/zipball/d64a5ca0391eec1feb5bfc649956bb12f050db90",
+                "reference": "d64a5ca0391eec1feb5bfc649956bb12f050db90",
                 "shasum": ""
             },
             "require": {
@@ -43,9 +43,9 @@
             "description": "A straightforward and dependency-light web framework with minimal syntax learning curves.",
             "support": {
                 "issues": "https://github.com/nox7/nox/issues",
-                "source": "https://github.com/nox7/nox/tree/1.3.1"
+                "source": "https://github.com/nox7/nox/tree/1.3.2"
             },
-            "time": "2021-07-12T20:01:06+00:00"
+            "time": "2021-07-19T16:40:08+00:00"
         }
     ],
     "packages-dev": [],
