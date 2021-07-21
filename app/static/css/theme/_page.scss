@@ -2,9 +2,10 @@
 
 page-container{
 	display:flex;
-	height:100vh;
+	min-height:100vh;
 
 	& > main{
+		width:100%;
 		flex-grow:1;
 		overflow:auto;
 		padding:3.5rem 100px;

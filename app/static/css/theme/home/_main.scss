@@ -1,12 +1,23 @@
 home-page{
 	display:block;
+	width:100%;
 	p{
 		font-size:1.09rem;
 		color:rgb(45,45,45);
 	}
-	.s-1{
+
+	.s-1, .s-2{
 		max-width:1280px;
 		margin:130px auto;
+	}
+
+	.s-1{
+		h2{
+			padding-top:unset !important;
+		}
+	}
+
+	.s-2{
 		h2{
 			padding-top:unset !important;
 		}
