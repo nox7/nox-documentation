@@ -17,7 +17,7 @@
 	);
 
 	// Load the Abyss ORM configuration
-	Abyss::loadConfig(__DIR__);
+	// Abyss::loadConfig(__DIR__);
 
 	// Load the request handler
 	$requestHandler = new \Nox\Router\RequestHandler($router);
