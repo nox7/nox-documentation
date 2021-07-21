@@ -19,12 +19,22 @@
 
 		#[Route("GET", "/routing")]
 		public function routeView(): string{
-			return Renderer::renderView("docs/v1/routing.html");
+			return Renderer::renderView("docs/v1/routing/main.html");
+		}
+
+		#[Route("GET", "/routing/dynamic-routing")]
+		public function dynamicRouteView(): string{
+			return Renderer::renderView("docs/v1/routing/dynamic-routing.html");
+		}
+
+		#[Route("GET", "/routing/fetching-available-routes")]
+		public function fetchAvailableRoutesView(): string{
+			return Renderer::renderView("docs/v1/routing/fetching-all-available-routes.html");
 		}
 
 		#[Route("GET", "/routing/custom-route-method-attribute")]
 		public function routeMethodAttributeView(): string{
-			return Renderer::renderView("docs/v1/custom-method-attributes.html");
+			return Renderer::renderView("docs/v1/routing/custom-method-attributes.html");
 		}
 
 		#[Route("GET", "/layouts")]
