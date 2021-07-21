@@ -1,0 +1,21 @@
+content-banner{
+	display:block;
+	padding:2.5rem 1rem;
+	text-align:center;
+
+	h3{
+		color:white;
+		font-size:2.5rem;
+	}
+
+	p{
+		color:rgb(240,240,240) !important;
+		a{
+			color:#fc6bff;
+			text-decoration: none;
+			&:hover{
+				color:#FD9EFFFF;
+			}
+		}
+	}
+}
