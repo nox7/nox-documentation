@@ -2,5 +2,6 @@
     "require": {
         "php": ">=8.0",
         "nox7/nox": "*"
-    }
+    },
+    "minimum-stability": "beta"
 }
