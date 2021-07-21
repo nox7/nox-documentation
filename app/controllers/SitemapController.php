@@ -9,7 +9,7 @@
 		public function sitemapXMLView(): string{
 			header('Content-type: text/xml');
 			header('Pragma: public');
-			
+
 			$isSSLOn = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? true : false;
 			$baseURL = sprintf(
 				"http%s://%s",
