@@ -1,3 +1,7 @@
+<?php
+	/** @var string $htmlHead */
+	/** @var string $htmlBody */
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
