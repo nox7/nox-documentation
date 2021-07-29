@@ -3,99 +3,97 @@
 <title>Dynamic Routing - Nox PHP Framework</title>
 }
 @Body{
-<main>
-	<h1>Dynamic Routing - Routing Without Attributes</h1>
-	<p>
-		TODO finish this
-	</p>
+<h1>Dynamic Routing - Routing Without Attributes</h1>
+<p>
+	TODO finish this
+</p>
 
-	<table-of-contents>
-		<toc-title>Table of Contents</toc-title>
+<table-of-contents>
+	<toc-title>Table of Contents</toc-title>
+	<group>
+		<a href="#">todo</a>
 		<group>
 			<a href="#">todo</a>
-			<group>
-				<a href="#">todo</a>
-			</group>
 		</group>
-	</table-of-contents>
+	</group>
+</table-of-contents>
 
-	<h2 id="setting-up-a-controller-class">The DynamicRoute Object</h2>
-	<p>
+<h2 id="setting-up-a-controller-class">The DynamicRoute Object</h2>
+<p>
 
-	</p>
-	<pre class="language-php line-numbers">
-		<code>
-			new Nox\Router\DynamicRoute(
-				requestMethod: &quot;get&quot;,
-				requestPath: &quot;/test&quot;,
-				isRegex: false,
-				onRender: Closure::fromCallable(function() {
-					return &quot;&lt;p&gt;Hello world&lt;/p&gt;&quot;;
-				}),
-			);
-		</code>
-	</pre>
-	<h2 id="">Prechecking a Route Before Rendering</h2>
-	<pre class="language-php line-numbers">
-		<code>
-			// This DynamicRoute will _never_ match
-			// But it will not stop the router from checking other routes
-			new Nox\Router\DynamicRoute(
-				requestMethod: &quot;get&quot;,
-				requestPath: &quot;/always-404&quot;,
-				isRegex: false,
-				onRender: Closure::fromCallable(function() {
-					return &quot;&lt;p&gt;You will never see me&lt;/p&gt;&quot;;
-				}),
-				onRouteCheck: Closure::fromCallable(function() {
-					return new Nox\Router\DynamicRouteResponse(
-						isRouteUsable: false,
-					);
-				}),
-			);
-		</code>
-	</pre>
-	<pre class="language-php line-numbers">
-		<code>
-			// This DynamicRoute will _never_ match
-			// And it will cause the router to stop here instead
-			// of continuing to search for other routes
-			new Nox\Router\DynamicRoute(
-				requestMethod: &quot;get&quot;,
-				requestPath: &quot;/always-404&quot;,
-				isRegex: false,
-				onRender: Closure::fromCallable(function() {
-					return &quot;&lt;p&gt;You will never see me&lt;/p&gt;&quot;;
-				}),
-				onRouteCheck: Closure::fromCallable(function() {
-					return new Nox\Router\DynamicRouteResponse(
-						isRouteUsable: false,
-						responseCode:404,
-					);
-				}),
-			);
-		</code>
-	</pre>
-	<p>
-		You can add duplicate DynamicRoutes (objects with the same requestPath) similar to how MVC attribute routes can have multiple methods with the same request URI.
-	</p>
-	<h2 id="">Registering a Dynamic Route into the Router</h2>
-	<p>
-		Commonly, you would add logic to your <code>nox-request.php</code> file to access the router and then add the dynamic route with the router's method <code>addDynamicRoute</code>.
-	</p>
-	<pre class="language-php line-numbers">
-		<code>
-			$dynamicRoute = new Nox\Router\DynamicRoute(
-				requestMethod: &quot;get&quot;,
-				requestPath: &quot;/test&quot;,
-				isRegex: false,
-				onRender: Closure::fromCallable(function() {
-					return &quot;&lt;p&gt;Hello world&lt;/p&gt;&quot;;
-				}),
-			);
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		new Nox\Router\DynamicRoute(
+			requestMethod: &quot;get&quot;,
+			requestPath: &quot;/test&quot;,
+			isRegex: false,
+			onRender: Closure::fromCallable(function() {
+				return &quot;&lt;p&gt;Hello world&lt;/p&gt;&quot;;
+			}),
+		);
+	</code>
+</pre>
+<h2 id="">Prechecking a Route Before Rendering</h2>
+<pre class="language-php line-numbers">
+	<code>
+		// This DynamicRoute will _never_ match
+		// But it will not stop the router from checking other routes
+		new Nox\Router\DynamicRoute(
+			requestMethod: &quot;get&quot;,
+			requestPath: &quot;/always-404&quot;,
+			isRegex: false,
+			onRender: Closure::fromCallable(function() {
+				return &quot;&lt;p&gt;You will never see me&lt;/p&gt;&quot;;
+			}),
+			onRouteCheck: Closure::fromCallable(function() {
+				return new Nox\Router\DynamicRouteResponse(
+					isRouteUsable: false,
+				);
+			}),
+		);
+	</code>
+</pre>
+<pre class="language-php line-numbers">
+	<code>
+		// This DynamicRoute will _never_ match
+		// And it will cause the router to stop here instead
+		// of continuing to search for other routes
+		new Nox\Router\DynamicRoute(
+			requestMethod: &quot;get&quot;,
+			requestPath: &quot;/always-404&quot;,
+			isRegex: false,
+			onRender: Closure::fromCallable(function() {
+				return &quot;&lt;p&gt;You will never see me&lt;/p&gt;&quot;;
+			}),
+			onRouteCheck: Closure::fromCallable(function() {
+				return new Nox\Router\DynamicRouteResponse(
+					isRouteUsable: false,
+					responseCode:404,
+				);
+			}),
+		);
+	</code>
+</pre>
+<p>
+	You can add duplicate DynamicRoutes (objects with the same requestPath) similar to how MVC attribute routes can have multiple methods with the same request URI.
+</p>
+<h2 id="">Registering a Dynamic Route into the Router</h2>
+<p>
+	Commonly, you would add logic to your <code>nox-request.php</code> file to access the router and then add the dynamic route with the router's method <code>addDynamicRoute</code>.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		$dynamicRoute = new Nox\Router\DynamicRoute(
+			requestMethod: &quot;get&quot;,
+			requestPath: &quot;/test&quot;,
+			isRegex: false,
+			onRender: Closure::fromCallable(function() {
+				return &quot;&lt;p&gt;Hello world&lt;/p&gt;&quot;;
+			}),
+		);
 
-			$router->addDynamicRoute($dynamicRoute);
-		</code>
-	</pre>
-</main>
+		$router->addDynamicRoute($dynamicRoute);
+	</code>
+</pre>
 }

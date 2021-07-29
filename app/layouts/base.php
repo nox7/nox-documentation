@@ -12,7 +12,9 @@
 	<body>
 		<page-container>
 			<?php include __DIR__ . "/../views/_partials/_sidebar.html"; ?>
-			<?= $htmlBody ?>
+			<main>
+				<?= $htmlBody ?>
+			</main>
 		</page-container>
 	</body>
 </html>

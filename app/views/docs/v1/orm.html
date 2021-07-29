@@ -3,277 +3,275 @@
 <title>Abyss (Nox ORM) - Nox PHP Framework</title>
 }
 @Body{
-<main>
-	<h1>Object-relational Mapping with Abyss</h1>
-	<p>
-		Abyss is the name given to Nox's MySQL ORM class. Unlike Laravel's Eloquent, Abyss aims to be a single-transparency window to the MySQL driver underneath. In short, using Abyss <strong>will</strong> make your life easier by allowing instantiating objects to map to MySQL tables, rows, and columns; but you won't have the feeling of a large learning curve burden.
-	</p>
+<h1>Object-relational Mapping with Abyss</h1>
+<p>
+	Abyss is the name given to Nox's MySQL ORM class. Unlike Laravel's Eloquent, Abyss aims to be a single-transparency window to the MySQL driver underneath. In short, using Abyss <strong>will</strong> make your life easier by allowing instantiating objects to map to MySQL tables, rows, and columns; but you won't have the feeling of a large learning curve burden.
+</p>
 
-	<table-of-contents>
-		<toc-title>Table of Contents</toc-title>
+<table-of-contents>
+	<toc-title>Table of Contents</toc-title>
+	<group>
+		<a href="#setting-up-a-controller-class">Setting Up a Controller Class</a>
 		<group>
-			<a href="#setting-up-a-controller-class">Setting Up a Controller Class</a>
-			<group>
-				<a href="#regular-expression-routes">Regular Expressions and Routes</a>
-			</group>
-			<a href="#routes-with-a-common-base">Routes With a Common Base</a>
-			<group>
-				<a href="#route-bases-with-regular-expressions">Route Bases With Regular Expressions</a>
-			</group>
+			<a href="#regular-expression-routes">Regular Expressions and Routes</a>
 		</group>
-	</table-of-contents>
+		<a href="#routes-with-a-common-base">Routes With a Common Base</a>
+		<group>
+			<a href="#route-bases-with-regular-expressions">Route Bases With Regular Expressions</a>
+		</group>
+	</group>
+</table-of-contents>
 
-	<h2 id="setting-up-a-controller-class">Building a Model</h2>
-	<p>
-		All tables in your database are represented by models in the Nox ORM. Models describe the table they represent in pure PHP syntax.
-	</p>
-	<p>
-		You should have an existing database before proceeding with making models. Create a database via the MySQL CLI tools or via an admin dashboard (such as phpMyAdmin). Then, in your project's <code class="-php">nox-env.php</code>, fill in the values for the MySQL constants to connect successfully to that database.
-	</p>
-	<p>
-		Below is an example model that would represent a minimal User.
-	</p>
-	<pre class="language-php line-numbers">
-		<code>
-			&lt;?php
-				use \Nox\ORM\ColumnDefinition;
-				use \Nox\ORM\Interfaces\MySQLModelInterface;
-				use \Nox\ORM\MySQLDataTypes\Integer;
-				use \Nox\ORM\MySQLDataTypes\VariableCharacter;
+<h2 id="setting-up-a-controller-class">Building a Model</h2>
+<p>
+	All tables in your database are represented by models in the Nox ORM. Models describe the table they represent in pure PHP syntax.
+</p>
+<p>
+	You should have an existing database before proceeding with making models. Create a database via the MySQL CLI tools or via an admin dashboard (such as phpMyAdmin). Then, in your project's <code class="-php">nox-env.php</code>, fill in the values for the MySQL constants to connect successfully to that database.
+</p>
+<p>
+	Below is an example model that would represent a minimal User.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		&lt;?php
+			use \Nox\ORM\ColumnDefinition;
+			use \Nox\ORM\Interfaces\MySQLModelInterface;
+			use \Nox\ORM\MySQLDataTypes\Integer;
+			use \Nox\ORM\MySQLDataTypes\VariableCharacter;
 
-				class UsersModel implements MySQLModelInterface {
+			class UsersModel implements MySQLModelInterface {
 
-					/**
-					 * The name of this Model in the MySQL database as a table
-					 */
-					private string $mysqlTableName = &quot;users&quot;;
+				/**
+				 * The name of this Model in the MySQL database as a table
+				 */
+				private string $mysqlTableName = &quot;users&quot;;
 
-					/**
-					 * The string name of the class this model represents and can instantiate
-					 */
-					private string $representingClassName = &quot;User&quot;;
+				/**
+				 * The string name of the class this model represents and can instantiate
+				 */
+				private string $representingClassName = &quot;User&quot;;
 
-					public function getName(): string{
-						return $this-&gt;mysqlTableName;
-					}
-
-					public function getInstanceName(): string{
-						return $this-&gt;representingClassName;
-					}
-
-					public function getColumns(): array{
-						return [
-							new ColumnDefinition(
-								name:&quot;id&quot;,
-								classPropertyName: &quot;id&quot;,
-								dataType : new Integer(),
-								defaultValue: 0,
-								autoIncrement: true,
-								isPrimary: true,
-								isNull:false,
-							),
-							new ColumnDefinition(
-								name:&quot;name&quot;,
-								classPropertyName: &quot;name&quot;,
-								dataType : new VariableCharacter(65),
-								defaultValue: &quot;&quot;,
-							),
-							new ColumnDefinition(
-								name:&quot;email&quot;,
-								classPropertyName: &quot;email&quot;,
-								dataType : new VariableCharacter(65),
-								defaultValue:&quot;&quot;,
-							),
-							new ColumnDefinition(
-								name:&quot;creation_timestamp&quot;,
-								classPropertyName: &quot;creationTimestamp&quot;,
-								dataType : new Integer(),
-								defaultValue: time(),
-							),
-						];
-					}
+				public function getName(): string{
+					return $this-&gt;mysqlTableName;
 				}
-			?&gt;
-		</code>
-	</pre>
-	<p>
-		This tells the Abyss ORM how to understand the MySQL database it will interact with. It is also strictly followed when interacting with model instance classes. We will touch on this shortly.
-	</p>
-	<h2 id="syncing-models-to-the-database">Synchronizing Models to the MySQL Database</h2>
-	<p>
-		You have created your MySQL table model, but now it needs to be synchronized into your existing database. Abyss will either create or update an existing table in the database outlined in the nox-env.php file to match your table columns definition.
-	</p>
-	<p>
-		The Nox example app will come with a folder named <code>app/cli-scripts</code> which houses a <code>sync-models.php</code> script. Run this script via a CLI and within a few moments the table will now exist in your database.
-	</p>
-	<p>
-		If you did not use the Nox example model as instructed at the beginning of the Getting Started page, then the script to synchronize models to the existing database in nox-env.php is below.
-	</p>
-	<pre class="language-php line-numbers">
-		<code>
-			&lt;?php
-				require_once __DIR__ . &quot;/../../vendor/autoload.php&quot;;
 
-				use Nox\ORM\Abyss;
-
-				// Setup Abyss from this directory.
-				// This is only necessary when not being used with the Router
-				// such as from CLI (this script) or on its own
-				Abyss::loadConfig(__DIR__ . &quot;/..&quot;);
-				$abyss = new Abyss();
-
-				// Sync the models to the current local MySQL database
-				$abyss-&gt;syncModels();
-		</code>
-	</pre>
-	<h2 id="using-classes-as-model-instances">Using Classes as Model Instances</h2>
-	<p>
-		A class can extend ModelClass and implement ModelInstance that will allow it to represent rows in a table. With this, you can use pure PHP to handle MySQL operations on instances. A base User instance example is show below.
-	</p>
-	<pre class="language-php line-numbers">
-		<code>
-			&lt;?php
-
-				use Nox\ORM\Interfaces\ModelInstance;
-				use Nox\ORM\Interfaces\MySQLModelInterface;
-				use Nox\ORM\ModelClass;
-
-				class User extends ModelClass implements ModelInstance
-				{
-					public ?int $id = null;
-					public string $name;
-					public string $email;
-					public int $creationTimestamp;
-
-					public static function getModel(): MySQLModelInterface{
-						return new UsersModel();
-					}
-
-					public function __construct(){
-						parent::__construct($this);
-					}
+				public function getInstanceName(): string{
+					return $this-&gt;representingClassName;
 				}
-		</code>
-	</pre>
-	<p>
-		The public properties of this class <strong>must</strong>, at minimum, define the columns of the model the class represents. Refer to the UserModel in the above section. The ColumnDefinition <code>classPropertyName</code> must match a public property in the User model.
-	</p>
-	<p>
-		When a new user is constructed, the default values in the class' model are applied to the correlating public properties.
-	</p>
-	<pre class="language-php line-numbers">
-		<code>
-			&lt;?php
 
-				$user = new User();
-		</code>
-	</pre>
-	<p>
-		For example: in the above code, because the User's model (UserModel) defines the creation_timestamp as an integer with a default value of <code>time()</code>, then accessing the property <code>->creationTimestamp</code> will provide the current UNIX time.
-	</p>
-	<p>
-		Calling <code>->save()</code> on the user class will save that instance to the database and then fill in the primary key (in this case, the <code>id</code> public property).
-	</p>
-	<pre class="language-php line-numbers">
-		<code>
-			&lt;?php
-
-				// $user->id is null until the user is saved
-				$user = new User();
-				$user->name = "nox7";
-				$user->save();
-
-				// Now, $user->id is no longer null
-				var_dump($user->id);
-				// > 1
-		</code>
-	</pre>
-	<p>
-		You can then delete the model's MySQL row by calling <code>->delete()</code>
-	</p>
-	<pre class="language-php line-numbers">
-		<code>
-			&lt;?php
-
-				// Will delete the row in the MySQL table that is associated
-				// with the User class' primary key (in this case, 'id' as is
-				// defined by the User's model's column definition)
-				$user->delete();
-		</code>
-	</pre>
-	<h2 id="queries">Performing Queries with Abyss</h2>
-	<p>
-		Currently, there are two methods in which you can perform structure queries through the ORM. The first is a direct, single return by primary key query.
-	</p>
-	<pre class="language-php line-numbers">
-		<code>
-			&lt;?php
-
-				$abyss = new Abyss();
-
-				// We want to fetch the user with an ID of 39
-
-				/** @var User $user */
-				$user = $abyss->fetchInstanceByModelPrimaryKey(
-					model: User::getModel(),
-					keyValue: 39,
-				);
-
-				if ($user !== null){
-					// Found the user
+				public function getColumns(): array{
+					return [
+						new ColumnDefinition(
+							name:&quot;id&quot;,
+							classPropertyName: &quot;id&quot;,
+							dataType : new Integer(),
+							defaultValue: 0,
+							autoIncrement: true,
+							isPrimary: true,
+							isNull:false,
+						),
+						new ColumnDefinition(
+							name:&quot;name&quot;,
+							classPropertyName: &quot;name&quot;,
+							dataType : new VariableCharacter(65),
+							defaultValue: &quot;&quot;,
+						),
+						new ColumnDefinition(
+							name:&quot;email&quot;,
+							classPropertyName: &quot;email&quot;,
+							dataType : new VariableCharacter(65),
+							defaultValue:&quot;&quot;,
+						),
+						new ColumnDefinition(
+							name:&quot;creation_timestamp&quot;,
+							classPropertyName: &quot;creationTimestamp&quot;,
+							dataType : new Integer(),
+							defaultValue: time(),
+						),
+					];
 				}
-		</code>
-	</pre>
-	<p>
-		The second is a collection of objects with logic. The logic can be in the form of a column query set, limiter, or order.
-	</p>
-	<p>
-		Below is an example of all the possible options. <strong>The only required parameter</strong> is the model.
-	</p>
-	<pre class="language-php line-numbers">
-		<code>
-			&lt;?php
+			}
+		?&gt;
+	</code>
+</pre>
+<p>
+	This tells the Abyss ORM how to understand the MySQL database it will interact with. It is also strictly followed when interacting with model instance classes. We will touch on this shortly.
+</p>
+<h2 id="syncing-models-to-the-database">Synchronizing Models to the MySQL Database</h2>
+<p>
+	You have created your MySQL table model, but now it needs to be synchronized into your existing database. Abyss will either create or update an existing table in the database outlined in the nox-env.php file to match your table columns definition.
+</p>
+<p>
+	The Nox example app will come with a folder named <code>app/cli-scripts</code> which houses a <code>sync-models.php</code> script. Run this script via a CLI and within a few moments the table will now exist in your database.
+</p>
+<p>
+	If you did not use the Nox example model as instructed at the beginning of the Getting Started page, then the script to synchronize models to the existing database in nox-env.php is below.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		&lt;?php
+			require_once __DIR__ . &quot;/../../vendor/autoload.php&quot;;
 
-				$abyss = new Abyss();
+			use Nox\ORM\Abyss;
 
-				// Fetch an array of users
+			// Setup Abyss from this directory.
+			// This is only necessary when not being used with the Router
+			// such as from CLI (this script) or on its own
+			Abyss::loadConfig(__DIR__ . &quot;/..&quot;);
+			$abyss = new Abyss();
 
-				/** @var User[] $arrayOfUsers */
-				$arrayOfUsers = $abyss->fetchInstances(
-					model: new UsersModel(),
-					columnQuery: (new \Nox\ORM\ColumnQuery())
-						->where("name", "=", "nox7")
-						->or()
-						->where("email","LIKE","%gmail.com%"),
-					resultOrder: (new \Nox\ORM\ResultOrder())
-						->by("name", "desc"),
-					pager: (new \Nox\ORM\Pager(
-						pageNumber: 1,
-						limit: 5
-					))
-				);
+			// Sync the models to the current local MySQL database
+			$abyss-&gt;syncModels();
+	</code>
+</pre>
+<h2 id="using-classes-as-model-instances">Using Classes as Model Instances</h2>
+<p>
+	A class can extend ModelClass and implement ModelInstance that will allow it to represent rows in a table. With this, you can use pure PHP to handle MySQL operations on instances. A base User instance example is show below.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		&lt;?php
 
-				if (!empty($arrayOfUsers)){
-					// Some logic here
+			use Nox\ORM\Interfaces\ModelInstance;
+			use Nox\ORM\Interfaces\MySQLModelInterface;
+			use Nox\ORM\ModelClass;
+
+			class User extends ModelClass implements ModelInstance
+			{
+				public ?int $id = null;
+				public string $name;
+				public string $email;
+				public int $creationTimestamp;
+
+				public static function getModel(): MySQLModelInterface{
+					return new UsersModel();
 				}
-		</code>
-	</pre>
-	<p>
-		Again, only the <code>model</code> parameter is required. You can optionally provide any of the three <code>columnQuery, resultOrder, pager</code> parameters or none of them.
-	</p>
-	<h2 id="raw-mysqli-object">Raw Queries or Access to the MySQLi Object</h2>
-	<p>
-		In cases where you need to perform raw queries or operations with the MySQLi object in use by the Nox framework, you can obtain it from Abyss.
-	</p>
-	<pre class="language-php line-numbers">
-		<code>
-			&lt;?php
 
-				$abyss = new Abyss();
+				public function __construct(){
+					parent::__construct($this);
+				}
+			}
+	</code>
+</pre>
+<p>
+	The public properties of this class <strong>must</strong>, at minimum, define the columns of the model the class represents. Refer to the UserModel in the above section. The ColumnDefinition <code>classPropertyName</code> must match a public property in the User model.
+</p>
+<p>
+	When a new user is constructed, the default values in the class' model are applied to the correlating public properties.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		&lt;?php
 
-				/** @var mysqli $mysqli */
-				$mysqli = $abyss->getConnection();
-		</code>
-	</pre>
-</main>
+			$user = new User();
+	</code>
+</pre>
+<p>
+	For example: in the above code, because the User's model (UserModel) defines the creation_timestamp as an integer with a default value of <code>time()</code>, then accessing the property <code>->creationTimestamp</code> will provide the current UNIX time.
+</p>
+<p>
+	Calling <code>->save()</code> on the user class will save that instance to the database and then fill in the primary key (in this case, the <code>id</code> public property).
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		&lt;?php
+
+			// $user->id is null until the user is saved
+			$user = new User();
+			$user->name = "nox7";
+			$user->save();
+
+			// Now, $user->id is no longer null
+			var_dump($user->id);
+			// > 1
+	</code>
+</pre>
+<p>
+	You can then delete the model's MySQL row by calling <code>->delete()</code>
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		&lt;?php
+
+			// Will delete the row in the MySQL table that is associated
+			// with the User class' primary key (in this case, 'id' as is
+			// defined by the User's model's column definition)
+			$user->delete();
+	</code>
+</pre>
+<h2 id="queries">Performing Queries with Abyss</h2>
+<p>
+	Currently, there are two methods in which you can perform structure queries through the ORM. The first is a direct, single return by primary key query.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		&lt;?php
+
+			$abyss = new Abyss();
+
+			// We want to fetch the user with an ID of 39
+
+			/** @var User $user */
+			$user = $abyss->fetchInstanceByModelPrimaryKey(
+				model: User::getModel(),
+				keyValue: 39,
+			);
+
+			if ($user !== null){
+				// Found the user
+			}
+	</code>
+</pre>
+<p>
+	The second is a collection of objects with logic. The logic can be in the form of a column query set, limiter, or order.
+</p>
+<p>
+	Below is an example of all the possible options. <strong>The only required parameter</strong> is the model.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		&lt;?php
+
+			$abyss = new Abyss();
+
+			// Fetch an array of users
+
+			/** @var User[] $arrayOfUsers */
+			$arrayOfUsers = $abyss->fetchInstances(
+				model: new UsersModel(),
+				columnQuery: (new \Nox\ORM\ColumnQuery())
+					->where("name", "=", "nox7")
+					->or()
+					->where("email","LIKE","%gmail.com%"),
+				resultOrder: (new \Nox\ORM\ResultOrder())
+					->by("name", "desc"),
+				pager: (new \Nox\ORM\Pager(
+					pageNumber: 1,
+					limit: 5
+				))
+			);
+
+			if (!empty($arrayOfUsers)){
+				// Some logic here
+			}
+	</code>
+</pre>
+<p>
+	Again, only the <code>model</code> parameter is required. You can optionally provide any of the three <code>columnQuery, resultOrder, pager</code> parameters or none of them.
+</p>
+<h2 id="raw-mysqli-object">Raw Queries or Access to the MySQLi Object</h2>
+<p>
+	In cases where you need to perform raw queries or operations with the MySQLi object in use by the Nox framework, you can obtain it from Abyss.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		&lt;?php
+
+			$abyss = new Abyss();
+
+			/** @var mysqli $mysqli */
+			$mysqli = $abyss->getConnection();
+	</code>
+</pre>
 }
