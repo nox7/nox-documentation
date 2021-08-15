@@ -44,6 +44,13 @@
 					isNull:true,
 				),
 				new ColumnDefinition(
+					name:"page_layout_file_path",
+					classPropertyName: "pageLayoutFilePath",
+					dataType : new VariableCharacter(255),
+					defaultValue: null,
+					isNull:true,
+				),
+				new ColumnDefinition(
 					name:"title",
 					classPropertyName: "title",
 					dataType : new VariableCharacter(255),

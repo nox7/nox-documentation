@@ -1,10 +1,13 @@
 <?php
+	require_once __DIR__ . "/../../../classes/PageCategory.php";
+	require_once __DIR__ . "/../../../classes/LayoutFetcher.php";
+
 	/** @var array $viewScope */
 	/** @var Page $editedPage */
 	$editedPage = $viewScope['pageBeingEdited'];
 
-	require_once __DIR__ . "/../../../classes/PageCategory.php";
 	$allCategories = PageCategory::getAllCategoriesInHierarchy(null);
+	$allLayoutFilePaths = LayoutFetcher::getAvailableLayoutFilePaths();
 ?>
 <aside>
 	<div class="page-editor-sidebar-group">
@@ -43,6 +46,26 @@
 								}
 							}
 						}
+					}
+				?>
+			</select>
+		</div>
+		<small>Categories can define base routes</small>
+	</div>
+
+	<div class="page-editor-sidebar-group">
+		<div class="mb-1">
+			<label for="editor-page-layout">Page layout</label>
+		</div>
+		<div>
+			<select class="form-control form-control-sm" name="page-layout-file-path">
+				<?php
+					/** @var string $filePath */
+					foreach($allLayoutFilePaths as $filePath){
+						$baseFileName = basename($filePath);
+						?>
+						<option <?= $editedPage?->pageLayoutFilePath === $filePath ? "selected" : "" ?> value="<?= $filePath ?>"><?= $baseFileName ?></option>
+						<?php
 					}
 				?>
 			</select>
