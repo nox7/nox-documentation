@@ -49,6 +49,7 @@
 			$pageCategoryID = (int) $request->getPostValue("page-category", -1);
 			$pageRoute = $request->getPostValue("page-route", "");
 			$pageBody = $request->getPostValue("page-body", "");
+			$pageLayoutFilePath = $request->getPostValue("page-layout-file-path", "");
 			$pageHead = $request->getPostValue("page-head", "");
 
 			if (empty($pageTitle)){
@@ -65,6 +66,7 @@
 
 			$page = new Page();
 			$page->categoryID = $pageCategoryID;
+			$page->pageLayoutFilePath = $pageLayoutFilePath;
 			$page->title = $pageTitle;
 			$page->route = $pageRoute;
 			$page->body = $pageBody;
@@ -90,9 +92,10 @@
 			$pageCategoryID = (int) $_PATCH['page-category'];
 			$pageRoute = $_PATCH['page-route'];
 			$pageBody = $_PATCH['page-body'];
+			$pageLayoutFilePath = $_PATCH['page-layout-file-path'];
 			$pageHead = $_PATCH['page-head'];
 
-			/** @var Page $page */
+			/** @var Page $editedPage */
 			$abyss = new \Nox\ORM\Abyss();
 			$editedPage = $abyss->fetchInstanceByModelPrimaryKey(
 				model:Page::getModel(),
@@ -105,6 +108,7 @@
 
 			$editedPage->categoryID = $pageCategoryID;
 			$editedPage->title = $pageTitle;
+			$editedPage->pageLayoutFilePath = $pageLayoutFilePath;
 			$editedPage->route = $pageRoute;
 			$editedPage->body = $pageBody;
 			$editedPage->head = $pageHead;
