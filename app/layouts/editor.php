@@ -8,7 +8,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="/css/theme/main.css">
-		<script defer src="/external/prism/prism.js"></script>
 		<?php include __DIR__ . "/../views/_partials/_global-head.html"; ?>
 		<?= $htmlHead ?>
 	</head>
