@@ -12,7 +12,7 @@
 		<?php include __DIR__ . "/../views/_partials/_global-head.html"; ?>
 		<?= $htmlHead ?>
 	</head>
-	<body>
+	<body class="d-flex flex-column vh-100">
 		<?php include __DIR__ . "/../views/_partials/home-nav.html"; ?>
 		<form id="editor-form">
 			<editor-page-container>
