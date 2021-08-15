@@ -1,6 +1,7 @@
 <?php
 
 	require_once __DIR__ . "/../models/PagesModel.php";
+	require_once __DIR__ . "/PageCategory.php";
 
 	use Nox\ORM\Abyss;
 	use Nox\ORM\Interfaces\ModelInstance;
@@ -11,6 +12,7 @@
 	{
 		public ?int $id = null;
 		public ?int $categoryID;
+		public ?string $pageLayoutFilePath;
 		public string $title;
 		public string $route;
 		public string $body;
