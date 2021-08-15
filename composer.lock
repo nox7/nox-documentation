@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "nox7/nox",
-            "version": "1.4.0-beta3",
+            "version": "1.4.0-beta5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nox7/nox.git",
-                "reference": "8d165f18bc53000d205ad9270313c2f188a1f917"
+                "reference": "e607393d1c871401626241ecf063749437f55b84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nox7/nox/zipball/8d165f18bc53000d205ad9270313c2f188a1f917",
-                "reference": "8d165f18bc53000d205ad9270313c2f188a1f917",
+                "url": "https://api.github.com/repos/nox7/nox/zipball/e607393d1c871401626241ecf063749437f55b84",
+                "reference": "e607393d1c871401626241ecf063749437f55b84",
                 "shasum": ""
             },
             "require": {
@@ -43,9 +43,9 @@
             "description": "A straightforward and dependency-light web framework with minimal syntax learning curves.",
             "support": {
                 "issues": "https://github.com/nox7/nox/issues",
-                "source": "https://github.com/nox7/nox/tree/1.4.0-beta3"
+                "source": "https://github.com/nox7/nox/tree/1.4.0-beta5"
             },
-            "time": "2021-07-22T17:24:55+00:00"
+            "time": "2021-08-06T15:29:05+00:00"
         }
     ],
     "packages-dev": [],

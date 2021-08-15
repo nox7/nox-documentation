@@ -14,11 +14,11 @@
 	</head>
 	<body>
 		<?php include __DIR__ . "/../views/_partials/home-nav.html"; ?>
-		<editor-page-container>
-			<?php include __DIR__ . "/../views/_partials/editor/sidebar.html"; ?>
-			<form id="editor-form">
+		<form id="editor-form">
+			<editor-page-container>
+				<?php include __DIR__ . "/../views/_partials/editor/sidebar.php"; ?>
 				<?= $htmlBody ?>
-			</form>
-		</editor-page-container>
+			</editor-page-container>
+		</form>
 	</body>
 </html>

@@ -1,3 +1,8 @@
+<?php
+	/** @var array $viewScope */
+	/** @var ?Page $editedPage */
+	$editedPage = $viewScope['pageBeingEdited'];
+?>
 @Layout = "editor.php"
 @Head{
 <script defer src="/ace-editor/ace.js"></script>
@@ -8,12 +13,15 @@
 }
 @Body{
 <main>
+	<input type="hidden" id="page-id" name="page-id" value="<?= $editedPage?->id ?? "" ?>">
+	<textarea id="body-preload" style="display:none;"><?= htmlspecialchars($editedPage?->body ?? "") ?></textarea>
+	<textarea id="head-preload" style="display:none;"><?= htmlspecialchars($editedPage?->head ?? "") ?></textarea>
 	<div class="editor-tabs">
 		<div class="editor-tab-button-container">
-			<button type="button" class="editor-tab-button selected">Body</button>
+			<button session-name="body" type="button" class="editor-tab-button selected">Body</button>
 		</div>
 		<div class="editor-tab-button-container">
-			<button type="button" class="editor-tab-button">Head</button>
+			<button session-name="head" type="button" class="editor-tab-button">Head</button>
 		</div>
 	</div>
 	<div class="page-editor-container">

@@ -5,17 +5,17 @@
 	use \Nox\ORM\MySQLDataTypes\Integer;
 	use \Nox\ORM\MySQLDataTypes\VariableCharacter;
 
-	class UsersModel implements MySQLModelInterface {
+	class PageCategoriesModel implements MySQLModelInterface {
 
 		/**
 		 * The name of this Model in the MySQL database as a table
 		 */
-		private string $mysqlTableName = "users";
+		private string $mysqlTableName = "page_categories";
 
 		/**
 		 * The string name of the class this model represents and can instantiate
 		 */
-		private string $representingClassName = "User";
+		private string $representingClassName = "PageCategory";
 
 		public function getName(): string{
 			return $this->mysqlTableName;
@@ -37,21 +37,23 @@
 					isNull:false,
 				),
 				new ColumnDefinition(
+					name:"parent_category_id",
+					classPropertyName: "parentCategoryID",
+					dataType : new Integer(),
+					defaultValue: null,
+					isNull:true,
+				),
+				new ColumnDefinition(
 					name:"name",
 					classPropertyName: "name",
 					dataType : new VariableCharacter(65),
 					defaultValue: "",
 				),
 				new ColumnDefinition(
-					name:"email",
-					classPropertyName: "email",
-					dataType : new VariableCharacter(65),
+					name:"route_base",
+					classPropertyName: "routeBase",
+					dataType : new VariableCharacter(255),
 					defaultValue:"",
-				),
-				new ColumnDefinition(
-					name:"creation_timestamp",
-					classPropertyName: "creationTimestamp",
-					dataType : new Integer(),
 				),
 			];
 		}
