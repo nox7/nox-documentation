@@ -57,4 +57,20 @@
 			$reversedParentRoutes = array_reverse($parentRoutes);
 			return sprintf("%s%s", implode("", $reversedParentRoutes), $this->route);
 		}
+
+		/**
+		 * Gets the rendered result of a page
+		 */
+		public function getRenderedPage(): string{
+			$htmlHead = $this->head;
+			$htmlBody = $this->body;
+			$appBase = __DIR__ . "/.."; // Path to the app foler
+			$layoutFile = sprintf("%s%s", $appBase, $this->pageLayoutFilePath);
+			ob_start();
+			include $layoutFile;
+			$renderResult = ob_get_contents();
+			ob_end_clean();
+
+			return $renderResult;
+		}
 	}
