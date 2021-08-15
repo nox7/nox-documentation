@@ -5,6 +5,7 @@
 ?>
 @Layout = "editor.php"
 @Head{
+<title>Nox Docs Page Editor</title>
 <script defer src="/ace-editor/ace.js"></script>
 <script defer src="/ace-editor/mode-html.js"></script>
 <script defer src="/ace-editor/mode-javascript.js"></script>
