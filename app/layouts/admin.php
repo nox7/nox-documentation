@@ -13,11 +13,6 @@
 	</head>
 	<body class="d-flex flex-column vh-100">
 		<?php include __DIR__ . "/../views/_partials/admin-nav.html"; ?>
-		<form id="editor-form">
-			<editor-page-container>
-				<?php include __DIR__ . "/../views/_partials/editor/sidebar.php"; ?>
-				<?= $htmlBody ?>
-			</editor-page-container>
-		</form>
+		<?= $htmlBody ?>
 	</body>
 </html>

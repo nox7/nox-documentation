@@ -1,8 +1,6 @@
-@import "search";
-
-#home-nav{
+#admin-nav{
 	display:flex;
-	height:$home-nav-height;
+	height:$admin-nav-height;
 	background-color:rgb(29,29,29);
 
 	.logo-c{
@@ -26,10 +24,5 @@
 			}
 		}
 	}
-
-	.search-container{
-		display:flex;
-		justify-content: flex-end;
-		flex-grow:1;
-	}
 }
+

@@ -1,6 +1,6 @@
 <?php
 
-	require_once __DIR__ . "/../classes/Page.php";
+	require_once __DIR__ . "/../../classes/Page.php";
 
 	use Nox\Http\Rewrite;
 	use Nox\RenderEngine\Renderer;
