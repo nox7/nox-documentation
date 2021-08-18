@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "nox7/nox",
-            "version": "1.4.0-beta5",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nox7/nox.git",
-                "reference": "e607393d1c871401626241ecf063749437f55b84"
+                "reference": "865cc0b844a865cf22b955321cd91d50661b7373"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nox7/nox/zipball/e607393d1c871401626241ecf063749437f55b84",
-                "reference": "e607393d1c871401626241ecf063749437f55b84",
+                "url": "https://api.github.com/repos/nox7/nox/zipball/865cc0b844a865cf22b955321cd91d50661b7373",
+                "reference": "865cc0b844a865cf22b955321cd91d50661b7373",
                 "shasum": ""
             },
             "require": {
@@ -43,9 +43,9 @@
             "description": "A straightforward and dependency-light web framework with minimal syntax learning curves.",
             "support": {
                 "issues": "https://github.com/nox7/nox/issues",
-                "source": "https://github.com/nox7/nox/tree/1.4.0-beta5"
+                "source": "https://github.com/nox7/nox/tree/1.4.0"
             },
-            "time": "2021-08-06T15:29:05+00:00"
+            "time": "2021-08-18T14:18:55+00:00"
         }
     ],
     "packages-dev": [],
@@ -59,5 +59,5 @@
         "ext-simplexml": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }
