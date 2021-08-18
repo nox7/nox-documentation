@@ -17,6 +17,41 @@
 			return Renderer::renderView("docs/v1/quick-start.html");
 		}
 
+		#[Route("GET", "/nox-configs")]
+		public function noxConfigsMainView(): string{
+			return Renderer::renderView("docs/v1/configs/main.html");
+		}
+
+		#[Route("GET", "/nox-configs/json-config")]
+		public function noxJSONConfigView(): string{
+			return Renderer::renderView("docs/v1/configs/nox-json.html");
+		}
+
+		#[Route("GET", "/nox-configs/cache")]
+		public function noxJSONCacheView(): string{
+			return Renderer::renderView("docs/v1/configs/nox-cache.html");
+		}
+
+		#[Route("GET", "/nox-configs/mime")]
+		public function noxJSONMimeView(): string{
+			return Renderer::renderView("docs/v1/configs/nox-mime.html");
+		}
+
+		#[Route("GET", "/nox-configs/environment")]
+		public function noxEnvironmentView(): string{
+			return Renderer::renderView("docs/v1/configs/nox-env.html");
+		}
+
+		#[Route("GET", "/nox-configs/request")]
+		public function noxRequestView(): string{
+			return Renderer::renderView("docs/v1/configs/nox-request.html");
+		}
+
+		#[Route("GET", "/static-file-serving")]
+		public function staticFileServingView(): string{
+			return Renderer::renderView("docs/v1/static-file-serving.html");
+		}
+
 		#[Route("GET", "/routing")]
 		public function routeView(): string{
 			return Renderer::renderView("docs/v1/routing/main.html");

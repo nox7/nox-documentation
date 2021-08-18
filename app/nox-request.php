@@ -18,6 +18,7 @@
 	);
 
 	// Load the Abyss ORM configuration
+	// Comment this out to disable using Abyss and require a MySQL connection
 	// Abyss::loadConfig(__DIR__);
 
 	// Load the request handler
