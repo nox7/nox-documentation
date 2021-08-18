@@ -13,7 +13,11 @@
 		 * @param string $body
 		 * @return string
 		 */
-		public static function getTruncatedBodyOfFirstQueryMatch(string $body, string $query): string{
+		public static function getTruncatedBodyOfFirstQueryMatch(
+			string $body,
+			string $query,
+			bool $highlightResult,
+		): string{
 			$body = strip_tags($body);
 			$needlePosition = strpos(strtolower($body), strtolower($query));
 			if ($needlePosition === false){
@@ -30,7 +34,13 @@
 				if ($endLocation > strlen($body)){
 					$endLocation = strlen($body);
 				}
-				return substr($body, $startLocation, ($endLocation - $startLocation));
+
+				if (!$highlightResult) {
+					return substr($body, $startLocation, ($endLocation - $startLocation));
+				}else{
+					$stub = substr($body, $startLocation, ($endLocation - $startLocation));
+					return preg_replace("/(" . preg_quote($query) . ")/i", "<span class=\"query-result-in-body\">$1</span>", $stub);
+				}
 			}
 		}
 

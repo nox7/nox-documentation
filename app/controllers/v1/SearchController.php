@@ -12,7 +12,7 @@
 		#[Route("GET", "/docs/1.x/search")]
 		public function searchView(): string{
 			$request = new \Nox\Http\Request();
-			$query = $request->getGetValue("query", "");
+			$query = trim($request->getGetValue("query", ""));
 			$pageResults = [];
 
 			if (!empty($query)){
