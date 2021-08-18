@@ -19,7 +19,7 @@ link-wrap{
 		display:block;
 		text-decoration:none;
 		padding:0.5rem 2rem;
-		font-size:1.1rem;
+		font-size:1rem;
 		color:white;
 
 		&:hover{
@@ -30,9 +30,10 @@ link-wrap{
 		}
 	}
 	link-wrap{
+		margin-bottom:0;
 		a{
-			padding-left:2.75rem;
-			font-size:0.95rem;
+			padding-left:4rem;
+			font-size:0.925rem;
 		}
 	}
 }
