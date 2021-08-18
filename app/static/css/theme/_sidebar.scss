@@ -1,7 +1,9 @@
+
+
 page-container > aside{
 	background-color:rgb(60,60,60);
-	width:275px;
-	min-width:275px;
+	width:$docs-v1-sidebar-width;
+	min-width:$docs-v1-sidebar-width;
 }
 
 .logo-container{
@@ -29,11 +31,21 @@ link-wrap{
 			color:white;
 		}
 	}
-	link-wrap{
+	& > link-wrap{
 		margin-bottom:0;
 		a{
 			padding-left:4rem;
 			font-size:0.925rem;
+			color:rgb(215,215,215);
+		}
+
+		& > link-wrap{
+			margin-bottom:0;
+			a{
+				padding-left:6rem;
+				font-size:0.9rem;
+				color:rgb(190,190,190);
+			}
 		}
 	}
 }
