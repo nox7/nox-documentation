@@ -26,7 +26,6 @@
 			return Renderer::renderView(
 				viewFileName:"search.php",
 				viewScope: [
-					"query"=>trim($request->getGetValue("query", "")),
 					"pageResults"=>$pageResults,
 					"query"=>$query,
 				],
