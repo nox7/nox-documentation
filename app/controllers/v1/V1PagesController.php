@@ -49,6 +49,16 @@
 
 		#[Route("GET", "/orm")]
 		public function ormView(): string{
-			return Renderer::renderView("docs/v1/orm.html");
+			return Renderer::renderView("docs/v1/orm/main.html");
+		}
+
+		#[Route("GET", "/orm/models")]
+		public function ormModelsView(): string{
+			return Renderer::renderView("docs/v1/orm/models.html");
+		}
+
+		#[Route("GET", "/orm/model-class-instances")]
+		public function ormModelClassView(): string{
+			return Renderer::renderView("docs/v1/orm/model-class-instances.html");
 		}
 	}
