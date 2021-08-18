@@ -11,3 +11,10 @@ page-container{
 		padding:0 5.5rem 100px 5.5rem;
 	}
 }
+
+code{
+	background-color:map-get($theme-colors, dark);
+	color:white;
+	padding:3px;
+	border-radius:3px;
+}

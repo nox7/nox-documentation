@@ -5,22 +5,21 @@
 @Body{
 <h1>Dynamic Routing - Routing Without Attributes</h1>
 <p>
-	TODO finish this
+	Not all projects can be satisfied with PHP8+ attribute routing. For example, should you want to create a content management system (CMS) or similar application which allows userland routing, you will require <strong>dynamic routes</strong>.
 </p>
 
-<table-of-contents>
-	<toc-title>Table of Contents</toc-title>
-	<group>
-		<a href="#">todo</a>
-		<group>
-			<a href="#">todo</a>
-		</group>
-	</group>
-</table-of-contents>
+<toc-container></toc-container>
 
-<h2 id="setting-up-a-controller-class">The DynamicRoute Object</h2>
+<h2>What is a dynamic route?</h2>
 <p>
-
+	In contrast to an attribute route, a dynamic route is route that can be added after the PHP syntax has been pre-processed by the interpreter. You can create DynamicRoute objects and register them into the router.
+</p>
+<p>
+	Why would you want to do this? Say you have a database table that has pages with a column for <code class="language-php">page_route</code>. You would want to iterate through all of your pages and register that route into the Nox router.
+</p>
+<h2>The DynamicRoute Object</h2>
+<p>
+	Dynamic routes are represented by the DynamicRoute object. Construction of one is shown below.
 </p>
 <pre class="language-php line-numbers">
 	<code>
@@ -34,7 +33,16 @@
 		);
 	</code>
 </pre>
-<h2 id="">Prechecking a Route Before Rendering</h2>
+<p>
+	You'll notice that there is an <code class="language-php">onRender</code> parameter in the constructor. This is a <code class="language-php">Closure</code> that holds an anonymous function to be called if the route is matched and needs to be rendered. This closure is called as a method of the <code class="language-php">BaseController</code> and as such has access to any properties or methods of that class.
+</p>
+<p>
+	The return of the onRender closure callable should be a string or other Nox-router understand result (such as a Rewrite or Redirect) - just as it is with the attribute route methods.
+</p>
+<h2>Pre-flight checks on a Route Before Rendering</h2>
+<p>
+	Similar to how attribute routes can affect whether they will be processed when the route is matched, dynamic routes have this ability too. Optionally, you can provide the <code class="language-php">onRouteCheck</code> parameter to the DynamicRoute constructor parameters. This function is called <strong>if the route is matched</strong>. You can perform logic in this function to determine if the route can be usable. This Closure's callable <strong>must return</strong> a DynamicRouteResponse object.
+</p>
 <pre class="language-php line-numbers">
 	<code>
 		// This DynamicRoute will _never_ match
@@ -54,6 +62,9 @@
 		);
 	</code>
 </pre>
+<p>
+	A situation that this could be used in would be to check if the current HTTP session has an authenticated user. You can choose to just provide <code class="language-php">isRouteUsable</code> in the DynamicRouteResponse object constructor, or provide the other two parameters (responseCode, or newRequestPath) to <strong>stop the router from checking other routes</strong> and rewrite the request here.
+</p>
 <pre class="language-php line-numbers">
 	<code>
 		// This DynamicRoute will _never_ match
@@ -76,11 +87,11 @@
 	</code>
 </pre>
 <p>
-	You can add duplicate DynamicRoutes (objects with the same requestPath) similar to how MVC attribute routes can have multiple methods with the same request URI.
+	You <strong>can</strong> add DynamicRoutes with a duplicate requestPath similar to how MVC attribute routes can have multiple methods with the same request URI.
 </p>
-<h2 id="">Registering a Dynamic Route into the Router</h2>
+<h2>Registering a Dynamic Route into the Router</h2>
 <p>
-	Commonly, you would add logic to your <code>nox-request.php</code> file to access the router and then add the dynamic route with the router's method <code>addDynamicRoute</code>.
+	In practice, you would add logic to your <code>nox-request.php</code> file to access the router and then add the dynamic routes with the router's method <code>addDynamicRoute</code>.
 </p>
 <pre class="language-php line-numbers">
 	<code>
@@ -96,4 +107,7 @@
 		$router->addDynamicRoute($dynamicRoute);
 	</code>
 </pre>
+<p>
+	Now, going to <strong>/test</strong> in your Nox application will match to the above DynamicRoute and output <code>Hello world</code>.
+</p>
 }
