@@ -61,4 +61,14 @@
 		public function ormModelClassView(): string{
 			return Renderer::renderView("docs/v1/orm/model-class-instances.html");
 		}
+
+		#[Route("GET", "/orm/making-queries")]
+		public function ormModelClassQueriesView(): string{
+			return Renderer::renderView("docs/v1/orm/making-queries.html");
+		}
+
+		#[Route("GET", "/orm/making-queries/query-clauses")]
+		public function ormQueryClausesView(): string{
+			return Renderer::renderView("docs/v1/orm/query-clauses.html");
+		}
 	}

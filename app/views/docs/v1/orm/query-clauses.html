@@ -1,0 +1,90 @@
+@Layout = "docs-v1-page.php"
+@Head{
+<title>Query Clause Classes - Nox PHP Framework</title>
+}
+@Body{
+<h1>Query Clause Classes</h1>
+<p>
+	Nox's ORM provides class representation of certain MySQL query clauses. These clause objects are used when making queries against a ModelClass instance (such as a User class).
+</p>
+<toc-container></toc-container>
+<h2>The ColumnQuery Class</h2>
+<p>
+	The main methods of interest in a ColumnQuery are as follows
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		public function where(string $columnName, string $condition, string $value);
+		public function or();
+		public function and();
+		public function startConditionGroup();
+		public function endConditionGroup();
+	</code>
+</pre>
+<p>
+	An example of creating a ColumnQuery that represents the below MySQL clause is shown below
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		WHERE (email LIKE "%example%" AND name LIKE "nox%") OR (id = 1)
+	</code>
+</pre>
+<pre class="language-php line-numbers">
+	<code>
+		$columnQuery = new \Nox\ORM\ColumnQuery()
+			->startConditionGroup() // Start a parenthesis group
+			->where("email", "LIKE", "%example%")
+			->and()
+			->where("name", "LIKE", "nox%")
+			->endConditionGroup() // close the parenthesis group
+			->or()
+			->where("id", "=", 1)
+	</code>
+</pre>
+<p>
+	The first parameter of <code>where()</code> is the <strong>actual MySQL column name</strong> and not the property name represented in the model class. The synatx of the <code>where()</code> parameters is MySQL syntax. So to check against null you would write
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		->where("email", "IS NOT", "NULL")
+	</code>
+</pre>
+<pre class="language-php line-numbers">
+	<code>
+		->where("email", "IS", "NULL")
+	</code>
+</pre>
+<div class="alert alert-primary">
+	All clauses are query built as prepared queries or escaped queries (in the case of a multi-query situation, such as when saving a collection).
+</div>
+<h2>ResultOrder</h2>
+<p>
+	The ResultOrder class is a simpler class that represents how to order a query's result set. It has only one method of interest
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		public function by(string $columnName, string $order);
+	</code>
+</pre>
+<pre class="language-php line-numbers">
+	<code>
+		$resultOrder = new \Nox\ORM\ResultOrder()
+			->by("email", "ASC");
+	</code>
+</pre>
+<p>
+	Multiple <code>by()</code>'s can be strung together to have multiple orderings - just as MySQL natively allows.
+</p>
+<h2>Pager Class</h2>
+<p>
+	The Pager class is the simplest clause class and represents how a query's result set will be limited and offset. It has no methods and simply uses properties in its constructor
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		$pager = new \Nox\ORM\Pager(
+			pageNumber: 1,
+			limit: 100,
+		);
+	</code>
+</pre>
+}

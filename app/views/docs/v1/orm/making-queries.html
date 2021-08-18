@@ -1,0 +1,65 @@
+@Layout = "docs-v1-page.php"
+@Head{
+<title>Querying Model Class Collections - Nox PHP Framework</title>
+}
+@Body{
+<h1>Making Queries to Fetch Collections of Model Classes</h1>
+<p>
+	The previous documentation outlined how to use <code>::fetch()</code> on a model class to fetch by primary key, but the majority of cases will most likely require queries to fetch collections of model classes.
+</p>
+<toc-container></toc-container>
+<h2>Using ::query()</h2>
+<p>
+	An empty query will fetch every row in the MySQL table of that calling class.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		/** @var User[] $allUsers */
+		$allUsers = User::query();
+	</code>
+</pre>
+<p>
+	To check for results, simply check if the array is empty or count the length of the array.
+</p>
+<h2>Column Queries</h2>
+<p>
+	To perform a more MySQL-like query on the columns of the model class (again, we will continue to use the User example), you can provide the <code>columnQuery</code> named argument.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		/** @var User[] $allUsers */
+		$allUsers = User::query(
+			columnQuery: (new \Nox\ORM\ColumnQuery())
+				->where("email","=","example1@example.com"),
+		);
+	</code>
+</pre>
+<p>
+	This will return an array of User model class instances where their email is equal to the above clause. More on the classes, syntax, and methods of the clause classes in the Nox ORM can be found in the <a href="/docs/1.x/orm/making-queries/query-clauses">query clauses documentation page</a>.
+</p>
+<h2>Result Ordering &amp; Pagination</h2>
+<p>
+	The query() static also has two other named parameters that can be provided as arguments. <code>resultOrder</code> and <code>pager</code>.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		$perPage = 10;
+		$pageNumber = 1;
+
+		/** @var User[] $allUsers */
+		$allUsers = User::query(
+			columnQuery: (new \Nox\ORM\ColumnQuery())
+				->where("email","=","example1@example.com"),
+			resultOrder: (new \Nox\ORM\ResultOrder())
+				->by("id", "ASC"),
+			pager: (new \Nox\ORM\Pager(
+				pageNumber: $pageNumber,
+				limit $perPage,
+			)),
+		);
+	</code>
+</pre>
+<p>
+	Again, for more specifics on the clauses classes, their syntax, and more complex queries review the <a href="/docs/1.x/orm/making-queries/query-clauses">query clauses documentation page</a>.
+</p>
+}
