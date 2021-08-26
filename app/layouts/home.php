@@ -18,5 +18,6 @@
 		<page-container>
 			<?= $htmlBody ?>
 		</page-container>
+		<?php include __DIR__ . "/../views/_partials/_footer.html" ?>
 	</body>
 </html>

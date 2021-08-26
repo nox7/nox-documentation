@@ -14,6 +14,7 @@
 	</head>
 	<body>
 		<?php include __DIR__ . "/../views/_partials/google-tag-manager-noscript.html"; ?>
+		<?php include __DIR__ . "/../views/_partials/_top-doc-nav.html"; ?>
 		<page-container>
 			<?php include __DIR__ . "/../views/_partials/_sidebar.html"; ?>
 			<main>
@@ -21,5 +22,6 @@
 				<?= $htmlBody ?>
 			</main>
 		</page-container>
+		<?php include __DIR__ . "/../views/_partials/_footer.html" ?>
 	</body>
 </html>

@@ -1,0 +1,11 @@
+#top-doc-nav{
+	background-color:lighten(map-get($theme-colors, dark), 5%);
+	border-top:2px solid $nox-purple;
+	border-bottom:2px solid $nox-purple;
+	padding:0.22rem 1rem;
+	color:white;
+	.primary-bar{
+		display:flex;
+		justify-content: space-between;
+	}
+}
