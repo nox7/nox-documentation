@@ -1,5 +1,6 @@
 @import "search";
 @import "top-doc-nav";
+@import "home-small-nav";
 
 #home-nav{
 	display:flex;
@@ -32,5 +33,11 @@
 		display:flex;
 		justify-content: flex-end;
 		flex-grow:1;
+	}
+}
+
+@media (max-width:map-get($grid-breakpoints, xl)){
+	#home-nav{
+		display:none;
 	}
 }
