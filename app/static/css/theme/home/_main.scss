@@ -7,11 +7,33 @@ home-page{
 	}
 
 	.s-1, .s-2{
-		max-width:1280px;
-		margin:130px auto;
+		padding:2.5rem;
+		display:flex;
+		justify-content: center;
+		width:100%;
+
+		p{
+			color:rgb(50,50,50);
+			font-size:1.05rem;
+			line-height:1.88rem;
+		}
+
+
+		& > div{
+			max-width:1450px;
+		}
+
+		& h2{
+			font-size:3rem;
+			margin-bottom:1.5rem;
+		}
+
 	}
 
 	.s-1{
+		img{
+			margin-left:2rem;
+		}
 		h2{
 			padding-top:unset !important;
 		}
@@ -26,10 +48,10 @@ home-page{
 
 carbon-fiber{
 	display:block;
-	background-color:rgb(40,40,40);
+	background-color:rgb(70,70,70);
 	padding:100px 1rem;
-	/*background-image:url(/images/nox-bg-crop-squooshed.jpg);
-	background-size:cover;*/
+	background-image:url(/images/diamonds.png);
+	box-shadow:0 0 10rem 0.1rem rgb(0 0 0 / 20%) inset;
 
 	.home-bg-logo-container{
 		margin-bottom:40px;
@@ -41,5 +63,17 @@ carbon-fiber{
 	h1, h3{
 		text-align:center;
 		color:white;
+	}
+}
+
+@media (max-width:map-get($grid-breakpoints, xl)){
+	.s-1, .s-2{
+		padding:1rem;
+	}
+
+	.s-1{
+		img{
+			margin-left:unset;
+		}
 	}
 }

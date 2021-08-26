@@ -3,6 +3,8 @@
 
 @import "variables";
 
+$theme-colors: map-merge($theme-colors, $custom-theme-colors);
+
 @import "../bootstrap/bootstrap";
 @import "nav/main";
 @import "footer";
