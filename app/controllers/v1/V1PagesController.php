@@ -1,4 +1,6 @@
 <?php
+
+	use Nox\Http\Redirect;
 	use Nox\RenderEngine\Renderer;
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
@@ -63,8 +65,11 @@
 		}
 
 		#[Route("GET", "/routing/fetching-available-routes")]
-		public function fetchAvailableRoutesView(): string{
-			return Renderer::renderView("docs/v1/routing/fetching-all-available-routes.html");
+		public function fetchAvailableRoutesRedirect(): Redirect{
+			return new Redirect(
+				path: "/docs/1.x/how-to/fetching-available-routes",
+				statusCode: 301,
+			);
 		}
 
 		#[Route("GET", "/routing/custom-route-method-attribute")]
@@ -105,5 +110,10 @@
 		#[Route("GET", "/orm/making-queries/query-clauses")]
 		public function ormQueryClausesView(): string{
 			return Renderer::renderView("docs/v1/orm/query-clauses.html");
+		}
+
+		#[Route("GET", "/how-to/fetching-available-routes")]
+		public function fetchAvailableRoutesView(): string{
+			return Renderer::renderView("docs/v1/how-to/fetching-all-available-routes.html");
 		}
 	}
