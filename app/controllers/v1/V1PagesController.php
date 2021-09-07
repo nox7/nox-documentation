@@ -84,7 +84,12 @@
 
 		#[Route("GET", "/views")]
 		public function viewsView(): string{
-			return Renderer::renderView("docs/v1/views.html");
+			return Renderer::renderView("docs/v1/views/views.html");
+		}
+
+		#[Route("GET", "/views/view-scope")]
+		public function viewScopeView(): string{
+			return Renderer::renderView("docs/v1/views/view-scope.html");
 		}
 
 		#[Route("GET", "/orm")]

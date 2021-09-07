@@ -1,0 +1,64 @@
+@Layout = "docs-v1-page.php"
+@Head{
+<title>View Scope - Nox PHP Framework</title>
+}
+@Body{
+<h1>View Scope - Providing Variables Directly to Your View</h1>
+<p>
+	When a view is rendered, you can optionally provide direct data from your controller into the view's scope. (For reference, these data is also available to whatever layout is being rendered because of inheritance when the view is rendered).
+</p>
+<content-group>
+	<h2>Passing the Data in the Controller</h2>
+	<p>
+		The <code class="language-php">Renderer:renderView()</code> function accepts the parameter viewScope to inject into the view being rendered. This is the data you would like to pass to your view.
+	</p>
+	<pre class="language-php line-numbers">
+		<code>
+			&lt;?php
+
+			use Nox\RenderEngine\Renderer;
+			use Nox\Router\Attributes\Route;
+			use Nox\Router\BaseController;
+
+			class HomeController extends BaseController{
+
+				#[Route("/")]
+				public function homeView(): string{
+					return Renderer::renderView(
+						viewFileName:"home.php",
+						viewScope:[
+							"test"=>"Hello world",
+						],
+					);
+				}
+
+			}
+		</code>
+	</pre>
+	<h3 id="php-code-inside-a-view">Accessing the View Scope</h3>
+	<p>
+		All views have an array variable injected into their PHP scope called <code class="language-php">$viewScope</code>. Your injected variables live as string indices in this array.
+	</p>
+	<p>
+		Following the code pattern above, the home.php view file could access the <code>test</code> variable in the following way.
+	</p>
+	<pre class="language-php line-numbers">
+		<code>
+			&lt;?php
+				// PHPStorm array shape definition for type hinting
+				/** @var array{test: string} $viewScope */
+				$test = $viewScope['test']
+			?&gt;
+			@Layout = &quot;base.php&quot;
+			@Head{
+				&lt;title&gt;Home Page&lt;/title&gt;
+			}
+			@Body{
+				&lt;p&gt;
+					Variable is &lt;?= $test ?&gt;
+				&lt;/p&gt;
+			}
+		</code>
+	</pre>
+</content-group>
+}
