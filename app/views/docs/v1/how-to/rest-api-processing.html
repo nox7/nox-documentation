@@ -122,6 +122,7 @@
 				$payload = BaseController::$requestPayload;
 
 				if ($somethingIsWrong){
+					http_response_code(500);
 					return new JSONError("Something went wrong.");
 				}else{
 					return new JSONSuccess();
