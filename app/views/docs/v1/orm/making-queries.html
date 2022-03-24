@@ -62,4 +62,46 @@
 <p>
 	Again, for more specifics on the clauses classes, their syntax, and more complex queries review the <a href="/docs/1.x/orm/making-queries/query-clauses">query clauses documentation page</a>.
 </p>
+<h2>Other Query Options</h2>
+<p>
+	There are other quick query options available on the ModelClass as static methods.
+</p>
+<h3>::queryOne()</h3>
+<p>
+	This method allows you a guaranteed single return to avoid having to have an array returned and then fetch the first result in the array. queryOne accepts the same three parameters that query does shown above.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		/** @var User $user */
+		$singleUser = User::queryOne(
+			columnQuery: (new \Nox\ORM\ColumnQuery())
+				->where("email","=","example1@example.com"),
+		);
+	</code>
+</pre>
+<h3>::count()</h3>
+<p>
+	Instead of returning an array and counting the array's values, you can utilize the MySQL native COUNT function. ::count will take a single parameter of columnQuery which is the value of Nox\ORM\ColumnQuery() that has been shown in previous examples.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		$numUsersWithEmails = User::count(
+			columnQuery: (new \Nox\ORM\ColumnQuery())
+				->where("email","IS NOT",null),
+		);
+	</code>
+</pre>
+<h3>::saveAll()</h3>
+<p>
+	Implementations that extend the ModelClass allow you to use the available method of <code>-&gt;save()</code>. However, sometimes you need to mass save a bunch of objects and running multiple queries isn't always the best option. A single query is more efficient. ::saveAll() allows you to provide it an array of ModalClass instances that will be compiled down into a single MySQL query set and saved all at once.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		$user1 = ?; // Some instance of User which extends ModelClass
+		$user2 = ?;
+		$user3 = ?;
+
+		User::saveAll([$user1, $user2, $user3]);
+	</code>
+</pre>
 }
