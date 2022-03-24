@@ -121,4 +121,9 @@
 		public function fetchAvailableRoutesView(): string{
 			return Renderer::renderView("docs/v1/how-to/fetching-all-available-routes.html");
 		}
+
+		#[Route("GET", "/how-to/rest-api-processing")]
+		public function processingRESTfulAPIs(): string{
+			return Renderer::renderView("docs/v1/how-to/rest-api-processing.html");
+		}
 	}

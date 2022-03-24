@@ -1,0 +1,158 @@
+@Layout = "docs-v1-page.php"
+@Head{
+<title>Processing RESTful APIs - Nox PHP Framework</title>
+}
+@Body{
+<h1>Processing RESTful Requests as APIs</h1>
+<p>
+	By nature, PHP will only auto-consume the request body of a POST request. However, REST APIs allow us to utilize methods such as PATCH, PUT, and DELETE to signify more information about a request's intents.
+</p>
+<p>
+	Nox includes the ability to consume the request body of multipart/form-data (As of 1.5.0, JSON consumption is not processed by Nox and you can easily do this manually by decoding the php://input).
+</p>
+<h2>Setting Up a Consumption Method</h2>
+<p>
+	From within a controller, you can mark a method with a ProcessRequestBody attribute that will prefill the BaseController's $requestPayload property with a key=>value array of the request's form data.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		use Nox\Router\Attributes\Route
+		use Nox\Router\Attributes\Controller
+		use Nox\Router\BaseController
+		use Nox\Http\Attributes\ProcessRequestBody
+
+		#[Controller]
+		public class PageController extends BaseController{
+
+			/**
+			 * PUTs a new page into the database
+			 */
+			#[Route("PUT", "/page")]
+			#[ProcessRequestBody]
+			public function getAccessibleURIs(): string{
+				$payload = BaseController::$requestPayload;
+
+				// $payload is an array of keys and values from your PUT'd form data
+			}
+
+		}
+	</code>
+</pre>
+<p>
+	Your front-end JavaScript may look something like the below, which would PUT to that API endpoint.
+</p>
+<pre class="language-javascript line-numbers">
+	<code>
+		class PageForm{
+			async onSubmit(){
+				const formData = new FormData();
+				formData.set("name", "My Page Name");
+
+				const response = await fetch("/page", {
+					method:"PUT",
+					body:formData
+				});
+			}
+		}
+	</code>
+</pre>
+<h2>Responding with JSON</h2>
+<p>
+	The Nox framework is minimal, but it does have the ability to easily handle JSON responses from its internal routing structure. You have two options. One includes an opinionated method and one is raw. First, we'll discuss the raw method that allows Nox to handle when a Controller method returns an array. The above Controller method will be used as an example.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		use Nox\Router\Attributes\Route
+		use Nox\Router\Attributes\Controller
+		use Nox\Router\BaseController
+		use Nox\Http\Attributes\ProcessRequestBody
+		use Nox\Http\Attributes\UseJSON
+
+		#[Controller]
+		public class PageController extends BaseController{
+
+			/**
+			 * PUTs a new page into the database
+			 */
+			#[Route("PUT", "/page")]
+			#[ProcessRequestBody]
+			#[UseJSON]
+			public function getAccessibleURIs(): array{
+				$payload = BaseController::$requestPayload;
+
+				return [
+					"status"=>1, // Status of 1 to tell the front-end everything is fine
+				];
+			}
+
+		}
+	</code>
+</pre>
+<p>
+	Notice how there is now a UseJSON attribute, the return type of the method is now an array, and an array is returned. The UseJSON attribute informs the Nox routing system to, if an array is returned by a Controller method, automatically set the necessary headers for a JSON string to be returned and to json_encode any returned array.
+</p>
+<p>
+	The header that gets set is <code>content-type: application/json; charset=UTF-8</code>
+</p>
+<h3>Opinionated JSON Result</h3>
+<p>
+	Nox also provides premade classes to return a JSON result that signifies if the JSON is describing a successful process or an erroneous one.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		use Nox\Router\Attributes\Route
+		use Nox\Router\Attributes\Controller
+		use Nox\Router\BaseController
+		use Nox\Http\Attributes\ProcessRequestBody
+		use Nox\Http\Attributes\UseJSON
+		use Nox\Http\JSON\JSONSuccess
+		use Nox\Http\JSON\JSONError
+		use Nox\Http\JSON\JSONResult
+
+		#[Controller]
+		public class PageController extends BaseController{
+
+			/**
+			 * PUTs a new page into the database
+			 */
+			#[Route("PUT", "/page")]
+			#[ProcessRequestBody]
+			#[UseJSON]
+			public function getAccessibleURIs(): JSONResult{
+				$payload = BaseController::$requestPayload;
+
+				if ($somethingIsWrong){
+					return new JSONError("Something went wrong.");
+				}else{
+					return new JSONSuccess();
+				}
+			}
+
+		}
+	</code>
+</pre>
+<p>
+	Instead, as shown above, we can return an instance of a JSONResult. These results automatically include a key for <code>status</code> which is either 1 (for success) or -1 (for errors) that your front-end can read from.
+</p>
+<p>
+	JSONError takes two arguments. The first is a string error message which gets put into the outputted JSON array as the key <code>error</code> and the second is an array that can be merged to provide additional data. An error might look like the below.
+</p>
+<pre class="language-json line-numbers">
+	<code>
+		 {
+			"status":-1,
+			"error":"Something went wrong."
+		}
+	</code>
+</pre>
+<p>
+	JSONSuccess takes one optional argument. It is an array of additional data to send with a success status. By default, JSONSuccess will always have a <code>status</code> key set to the integer value of 1. More keys can be provided by providing the first array argument to JSONSuccess's constructor.
+</p>
+<pre class="language-json line-numbers">
+	<code>
+		 {
+			"status":1
+		}
+	</code>
+</pre>
+}
