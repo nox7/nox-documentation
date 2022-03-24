@@ -10,31 +10,18 @@
 <p>
 	The Nox configuration file will tell the framework which directory to parse MVC controllers in. By default, it is the /controllers directory of your project directory.
 </p>
-
-<table-of-contents>
-	<toc-title>Table of Contents</toc-title>
-	<group>
-		<a href="#setting-up-a-controller-class">Setting Up a Controller Class</a>
-		<group>
-			<a href="#regular-expression-routes">Regular Expressions and Routes</a>
-		</group>
-		<a href="#routes-with-a-common-base">Routes With a Common Base</a>
-		<group>
-			<a href="#route-bases-with-regular-expressions">Route Bases With Regular Expressions</a>
-		</group>
-	</group>
-</table-of-contents>
-
-<h2 id="setting-up-a-controller-class">Setting Up a Controller Class</h2>
+<h2>Setting Up a Controller Class</h2>
 <p>
 	Because your request handler (by default, the nox-request.php file in your project's directory) requires the autoload.php file, you do not need to require the Nox framework components in the controllers.
 </p>
 <pre class="language-php line-numbers">
 	<code>
 		&lt;?php
+			use Nox\Router\Attributes\Controller;
 			use Nox\Router\Attributes\Route;
 			use Nox\Router\BaseController;
 
+			#[Controller]
 			class HomeController extends BaseController{
 
 			}
@@ -50,9 +37,11 @@
 <pre class="language-php line-numbers">
 	<code>
 		&lt;?php
+			use Nox\Router\Attributes\Controller;
 			use Nox\Router\Attributes\Route;
 			use Nox\Router\BaseController;
 
+			#[Controller]
 			class HomeController extends BaseController{
 
 				#[Route("GET", "/")]
@@ -78,7 +67,7 @@
 <content-group>
 	<h3 id="regular-expression-routes">Regular Expressions and Routes</h3>
 	<p>
-		You can use PHP's standard PCRE library in your routes. Additionally, named capture groups will be injected into the <code class="language-php">$_GET</code> superglobal
+		You can use PHP's standard PCRE library in your routes. Additionally, named capture groups will be found in the <code class="language-php">BaseController::$requestParameters</code> array. All Controllers must extend from BaseController, so this will always be accessible.
 	</p>
 	<p>
 		Below shows only a method (inside a controller class) with a route using the regular expression flag (third argument of <code class="language-php">#[Route()]</code> to capture a forum post route.
@@ -87,12 +76,13 @@
 		<code>
 			#[Route("GET", "/\/forum\/post\/(?&lt;threadID&gt;\d+)/", true)]
 			public function threadView(): string{
-				header("content-type: text/html; charset=utf-8");
+				header("content-type: text/html; charset=UTF-8");
 
 				// Fetch the named capture group
-				$threadID = (int) $_GET['threadID'];
+				$params = BaseController::$requestParameters;
+				$threadID = (int) $params['threadID'];
 
-				return "$threadID";
+				return (string) $threadID;
 			}
 		</code>
 	</pre>
@@ -103,7 +93,7 @@
 	In instances where many of your route methods have a common base, you can define the class-specific attribute <code class="language-php">#[RouteBase()]</code> <strong>on the class</strong> the methods are a part of.
 </p>
 <p>
-	Adding this attribute to your controller class will force all of the routes on the methods of the class to be prepended with the base defined in the route.
+	Adding this attribute to your controller class will force all the routes on the methods of the class to be prepended with the base defined in the route.
 </p>
 <p>
 	In the example below, all routes will only match if <em>/api/v1</em> comes before them.
@@ -111,9 +101,11 @@
 <pre class="language-php line-numbers">
 	<code>
 		&lt;?php
+			use Nox\Router\Attributes\Controller;
 			use Nox\Router\Attributes\Route;
 			use Nox\Router\BaseController;
 
+			#[Controller]
 			#[RouteBase("/api/v1")]
 			class HomeController extends BaseController{
 
@@ -136,19 +128,21 @@
 <content-group>
 	<h3 id="route-bases-with-regular-expressions">Route Bases With Regular Expressions</h3>
 	<p>
-		Similarly to method routes, you can define a <code class="language-php">#[RouteBase()]</code> as a regular expression capture. The named capture groups will be injected into the <code class="language-php">$_GET</code> superglobal - just like method Routes with named regular expression capture groups.
+		Similarly to method routes, you can define a <code class="language-php">#[RouteBase()]</code> as a regular expression capture. The named capture groups will be found in the <code class="language-php">BaseController::$requestParameters</code> array - just like method Routes with named regular expression capture groups.
 	</p>
 	<pre class="language-php line-numbers">
 		<code>
 			&lt;?php
+				use Nox\Router\Attributes\Controller;
 				use Nox\Router\Attributes\Route;
 				use Nox\Router\BaseController;
 
+				#[Controller]
 				#[RouteBase("/\/api\/v1\/(?&lt;pageName&gt;[^\/])/", true)]
 				class HomeController extends BaseController{
 
 				// And so on...
-				// pageName is accessible in the $_GET['pageName'] index on any method.
+				// pageName is accessible in the BaseController::$requestParameters index on any method.
 		</code>
 	</pre>
 </content-group>

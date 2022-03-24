@@ -65,10 +65,12 @@
 <pre class="language-php line-numbers">
 	<code>
 		&lt;?php
+			use Nox\Router\Attributes\Controller;
 			use Nox\Router\Attributes\Route;
 			use Nox\RenderEngine\Renderer;
 			use Nox\Router\BaseController;
 
+			#[Controller]
 			class HomeController extends BaseController{
 
 				#[Route("GET", "/")]

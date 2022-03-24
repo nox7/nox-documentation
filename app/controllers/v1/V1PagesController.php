@@ -1,14 +1,24 @@
 <?php
 
 	use Nox\Http\Redirect;
+	use Nox\RenderEngine\Exceptions\LayoutDoesNotExist;
+	use Nox\RenderEngine\Exceptions\ViewFileDoesNotExist;
 	use Nox\RenderEngine\Renderer;
+	use Nox\Router\Attributes\Controller;
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
 	use Nox\Router\BaseController;
+	use Nox\RenderEngine\Exceptions\ParseError;
 
+	#[Controller]
 	#[RouteBase("/docs/1.x")]
 	class V1PagesController extends BaseController{
 
+		/**
+		 * @throws ParseError
+		 * @throws ViewFileDoesNotExist
+		 * @throws LayoutDoesNotExist
+		 */
 		#[Route("GET", "/")]
 		public function versionHome(): string{
 			return Renderer::renderView("docs/v1/home.html");
