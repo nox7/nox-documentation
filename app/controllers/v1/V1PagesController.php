@@ -69,6 +69,11 @@
 			return Renderer::renderView("docs/v1/routing/main.html");
 		}
 
+		#[Route("GET", "/routing/redirecting-rewriting")]
+		public function routeRedirectsAndRewrites(): string{
+			return Renderer::renderView("docs/v1/routing/redirecting-rewriting.html");
+		}
+
 		#[Route("GET", "/routing/dynamic-routing")]
 		public function dynamicRouteView(): string{
 			return Renderer::renderView("docs/v1/routing/dynamic-routing.html");
