@@ -141,4 +141,9 @@
 		public function processingRESTfulAPIs(): string{
 			return Renderer::renderView("docs/v1/how-to/rest-api-processing.html");
 		}
+
+		#[Route("GET", "/how-to/syncing-models")]
+		public function syncingModels(): string{
+			return Renderer::renderView("docs/v1/how-to/syncing-models.html");
+		}
 	}
