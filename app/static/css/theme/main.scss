@@ -10,6 +10,7 @@ $theme-colors: map-merge($theme-colors, $custom-theme-colors);
 @import "footer";
 @import "page";
 @import "toc";
+@import "content-decoration";
 @import "content-flair";
 @import "sidebar";
 @import "home/main";
