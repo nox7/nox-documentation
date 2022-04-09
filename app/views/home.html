@@ -61,6 +61,77 @@
 					</div>
 				</div>
 			</section>
+			<section class="s-3">
+				<h3>Start Using PHP in New, Modern Ways</h3>
+				<h4>Leave the typical messy, scripting style of PHP in the dark ages. Experience OOP, MVC architecture in PHP</h4>
+			</section>
+			<section class="s-4">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<blog-style-content>
+								<h2>Create a Maintainable Application That Will Scale</h2>
+								<p>
+									You have, no-doubt, witnessed the enormous various that PHP code has in its ecosystem. A terrible mix of bad practice, business logic mixed with developer logic, and common misunderstandings. The default style of programming that PHP tends to aim developers towards with its lax scripting style leads developers to be stuck in a predicament of misunderstanding when moving to other languages.
+								</p>
+								<p>
+									<strong>Stop writing code that you'll dread coming back to.</strong>
+								</p>
+								<p>
+									To this day, you will still find PHP developers injecting their variables from user input into their MySQL queries.
+								</p>
+								<div class="my-3">
+									<pre>
+										<code class="language-php line-numbers">
+											$username = $_POST['username'] ?? null;
+											$result = $mysqli->query("SELECT id FROM `users` WHERE `username` = '" . $username ."');
+										</code>
+									</pre>
+								</div>
+								<p>
+									Of course, the solution here is to use prepared statements - whether it be in the PDO or MySQLi driver. However, why not just take MySQL syntax completely out of your application and write it all in pure PHP?
+								</p>
+								<p>
+									You can do this with Nox and the simple Nox ORM - Abyss.
+								</p>
+								<div class="my-3">
+									<pre>
+										<code class="language-php line-numbers">
+											#[Route("POST", "/change-username")]
+											public function changeUserName(): void{
+												$username = $_POST['username'] ?? null;
+												$columnQuery = new ColumnQuery()
+													->where("username","=",$username);
+
+												$user = User::queryOne($columnQuery);
+												$user->username = "New Username here";
+												$user->save();
+											}
+										</code>
+									</pre>
+								</div>
+								<p>
+									Learn more about how you can take MySQL syntax out of your PHP application forever in the ORM docs:
+								</p>
+								<div class="my-2">
+									<ul>
+										<li><a title="Abyss" href="/docs/1.x/orm">Abyss ORM</a></li>
+										<li><a title="Models" href="/docs/1.x/orm/models">Models</a></li>
+										<li><a title="Model instance classes" href="/docs/1.x/orm/model-class-instances">Model Instances</a></li>
+										<li><a title="Making queries on models" href="/docs/1.x/orm/making-queries">Making Queries</a></li>
+									</ul>
+								</div>
+								<p>
+									<a class="btn btn-lg btn-primary" title="Start using Nox PHP - the MVC framework for modern PHP" href="/docs/1.x/quick-start">
+										<i class="bi bi-play-btn-fill"></i>
+										<span>Get Started with Nox - the modern PHP MVC framework</span>
+									</a>
+								</p>
+							</blog-style-content>
+						</div>
+					</div>
+				</div>
+			</section>
 		</main>
 	</home-page>
 }
