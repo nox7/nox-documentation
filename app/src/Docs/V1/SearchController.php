@@ -1,21 +1,25 @@
 <?php
 
-	require_once __DIR__ . "/V1PagesController.php";
-	require_once __DIR__ . "/../../classes/PageSearch.php";
+	namespace Docs\V1;
 
 	use Nox\RenderEngine\Renderer;
+	use Nox\Router\Attributes\Controller;
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\BaseController;
+	use PageSearch;
 
-	class SearchController extends BaseController{
+	#[Controller]
+	class SearchController extends BaseController
+	{
 
 		#[Route("GET", "/docs/1.x/search")]
-		public function searchView(): string{
+		public function searchView(): string
+		{
 			$request = new \Nox\Http\Request();
 			$query = trim($request->getGetValue("query", ""));
 			$pageResults = [];
 
-			if (!empty($query)){
+			if (!empty($query)) {
 				$pageSearch = new PageSearch([
 					V1PagesController::class
 				]);
@@ -24,10 +28,10 @@
 			}
 
 			return Renderer::renderView(
-				viewFileName:"search.php",
+				viewFileName: "search.php",
 				viewScope: [
-					"pageResults"=>$pageResults,
-					"query"=>$query,
+					"pageResults" => $pageResults,
+					"query" => $query,
 				],
 			);
 		}

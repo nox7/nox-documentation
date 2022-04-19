@@ -1,29 +1,55 @@
 <?php
 
+	use Nox\Nox;
 	use Nox\ORM\Abyss;
+	use Nox\ORM\DatabaseCredentials;
+	use Nox\Router\BaseController;
+	use Nox\Router\Exceptions\NoMatchingRoute;
 
 	require_once __DIR__ . "/../vendor/autoload.php";
 	require_once __DIR__ . "/nox-env.php";
 
-	$requestPath = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-	$requestMethod = $_SERVER['REQUEST_METHOD'];
+	$nox = new Nox();
+	BaseController::$noxInstance = $nox;
 
-	// Load the router
-	$router = new Nox\Router\Router(
-		requestPath:$requestPath,
-		requestMethod:$requestMethod,
-	);
-	$router->loadAll(
-		fromDirectory: __DIR__,
+	// Set a static file serving directory
+	$nox->addStaticDirectory(
+		uriStub: "/",
+		directoryPath: __DIR__ . "/resources/static",
 	);
 
-	// Load the Abyss ORM configuration
-	// Comment this out to disable using Abyss and require a MySQL connection
-	// Abyss::loadConfig(__DIR__);
+	// Support static file mime types so the browser can recognize the static files
+	$nox->mapExtensionToMimeType("css", "text/css");
+	$nox->mapExtensionToMimeType("png", "image/png");
+	$nox->mapExtensionToMimeType("jpg", "image/jpeg");
+	$nox->mapExtensionToMimeType("jpeg", "image/jpeg");
+	$nox->mapExtensionToMimeType("js", "text/javascript");
+	$nox->mapExtensionToMimeType("mjs", "text/javascript");
+	$nox->mapExtensionToMimeType("gif", "image/gif");
+	$nox->mapExtensionToMimeType("weba", "audio/webm");
+	$nox->mapExtensionToMimeType("webm", "video/webm");
+	$nox->mapExtensionToMimeType("webp", "image/webp");
+	$nox->mapExtensionToMimeType("pdf", "application/pdf");
+	$nox->mapExtensionToMimeType("svg", "image/svg+xml");
 
-	// Load the request handler
-	$requestHandler = new \Nox\Router\RequestHandler($router);
-	\Nox\Router\BaseController::$requestHandler = $requestHandler;
+	// Mime caches
+	$nox->addCacheTimeForMime("image/png", 86400 * 60);
 
-	// Process the request
-	$requestHandler->processRequest();
+	// Process static files before anything else, to keep static file serving fast
+	$nox->router->processRequestAsStaticFile();
+
+	// If the code gets here, then it's not a static file. Load the rest of the setting directories
+	$nox->setViewsDirectory(__DIR__ . "/resources/views");
+	$nox->setLayoutsDirectory(__DIR__ . "/resources/layouts");
+	$nox->setSourceCodeDirectory(__DIR__ . "/src");
+
+	// Process the request as a routable request
+	try {
+		$nox->router->processRoutableRequest();
+	} catch (NoMatchingRoute $e) {
+		// 404
+		http_response_code(404);
+		// Process a new routable request, but change the path to our known 404 controller method route
+		$nox->router->requestPath = "/404";
+		$nox->router->processRoutableRequest();
+	}

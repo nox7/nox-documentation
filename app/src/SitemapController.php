@@ -1,8 +1,10 @@
 <?php
-	use Nox\RenderEngine\Renderer;
+
+	use Nox\Router\Attributes\Controller;
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\BaseController;
 
+	#[Controller]
 	class SitemapController extends BaseController{
 
 		#[Route("get", "/sitemap.xml")]
