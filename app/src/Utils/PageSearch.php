@@ -1,6 +1,11 @@
 <?php
 
+	namespace Utils;
+
 	use Nox\Router\Attributes\Route;
+	use Nox\Router\Attributes\RouteBase;
+	use ReflectionClass;
+	use ReflectionNamedType;
 
 	class PageSearch{
 
@@ -49,6 +54,9 @@
 			public array $classesToSearch
 		){}
 
+		/**
+		 * @throws \ReflectionException
+		 */
 		public function loadEligibleRoutes(): void{
 			$searchableRoutesAndBodies = [];
 			/** @var object $class */
@@ -60,7 +68,7 @@
 				// Fetch the route base, if there is one
 				foreach($classReflection->getAttributes() as $reflectionAttribute){
 					if ($reflectionAttribute->getName() === "Nox\\Router\\Attributes\\RouteBase"){
-						/** @var \Nox\Router\Attributes\RouteBase $baseInstance */
+						/** @var RouteBase $baseInstance */
 						$baseInstance = $reflectionAttribute->newInstance();
 						$routeBase = $baseInstance->uri;
 						break;
@@ -74,24 +82,25 @@
 					$returnType = $reflectionMethod->getReturnType();
 					// Check this method only returns a string
 					if ($returnType->getName() === "string") {
-						$attributes = $reflectionMethod->getAttributes();
+						$attributes = $reflectionMethod->getAttributes(
+							name:Route::class,
+							flags:\ReflectionAttribute::IS_INSTANCEOF,
+						);
 						foreach ($attributes as $reflectionAttribute) {
-							if ($reflectionAttribute->getName() === "Nox\Router\Attributes\Route") {
-								/** @var Route $routeInstance */
-								$routeInstance = $reflectionAttribute->newInstance();
-								$httpMethodForRoute = strtolower($routeInstance->method);
-								if ($httpMethodForRoute === "get" && $routeInstance->isRegex === false) {
-									// This route is searchable
-									// Get the rendered result
-									$pageHTML = $reflectionMethod->invoke($newClassInstance);
-									preg_match("/<main>(.+)<\/main>/ism", $pageHTML, $bodyMatches);
-									preg_match("/<h1>(.+)<\/h1>/ism", $pageHTML, $titleMatches);
-									$searchableRoutesAndBodies[] = [
-										"uri" => $routeBase . $routeInstance->uri,
-										"body" => $bodyMatches[1],
-										"title"=> $titleMatches[1],
-									];
-								}
+							/** @var Route $routeInstance */
+							$routeInstance = $reflectionAttribute->newInstance();
+							$httpMethodForRoute = strtolower($routeInstance->method);
+							if ($httpMethodForRoute === "get" && $routeInstance->isRegex === false) {
+								// This route is searchable
+								// Get the rendered result
+								$pageHTML = $reflectionMethod->invoke($newClassInstance);
+								preg_match("/<main>(.+)<\/main>/ism", $pageHTML, $bodyMatches);
+								preg_match("/<h1>(.+)<\/h1>/ism", $pageHTML, $titleMatches);
+								$searchableRoutesAndBodies[] = [
+									"uri" => $routeBase . $routeInstance->uri,
+									"body" => $bodyMatches[1],
+									"title"=> $titleMatches[1],
+								];
 							}
 						}
 					}

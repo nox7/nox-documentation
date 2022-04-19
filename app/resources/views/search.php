@@ -1,6 +1,9 @@
 <?php
 	/** @var array $viewScope */
 	/** @var array[] $pageResults */
+
+	use Utils\PageSearch;
+
 	$pageResults = $viewScope['pageResults'];
 
 	$query = $viewScope['query'];
