@@ -28,10 +28,10 @@
 			return Renderer::renderView("docs/v2/home.html");
 		}
 
-		#[Route("GET", "/quick-start")]
+		#[Route("GET", "/installation")]
 		public function quickStart(): string
 		{
-			return Renderer::renderView("docs/v2/quick-start.html");
+			return Renderer::renderView("docs/v2/installation.html");
 		}
 
 		#[Route("GET", "/nox-configs")]
