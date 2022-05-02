@@ -1,0 +1,47 @@
+@Layout = "v2/docs-page.php"
+@Head{
+<title>Fetching Accessible Routes - Nox PHP Framework</title>
+}
+@Body{
+<h1>Fetching All Accessible Routes</h1>
+<p>
+	You are able to fetch all routes that are accessible to a given HTTP request. The most common use case for this would be to dynamically generate a sitemap for web crawlers.
+</p>
+<p>
+	The Nox Router class has an exposed method <code class="language-php">getAllAccessibleRouteURIs(bool $includeRegexRoutes = false)</code> that will fetch all URIs the calling HTTP session can access. It will run any extra attributes that could restrict a viewer from accessing a route (such as a <code>#[RequireLogin()]</code> attribute) and remove such URIs from the return result.
+</p>
+<p>
+	DynamicRoute objects are also included and their <code>onRenderCheck</code> closures are called as well. Removing them from the result if necessary (based on the <code>onRenderCheck</code> return value).
+</p>
+<h2>Sample Code</h2>
+<p>
+	From within a controller, you can access the router by fetching the <code>BaseController::requestHandler</code>
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		#[Route("get", "/sitemap")]
+		public function getAccessibleURIs(): string{
+			$router = parent::$requestHandler->router;
+			$accessibleURIs = $router->getAllAccessibleRouteURIs();
+			return json_encode($accessibleURIs);
+		}
+	</code>
+</pre>
+<p>
+	From within a DynamicRoute, the scope of the <code>onRenderCheck</code> or <code>onRender</code> closure callbacks already registers the global <code>$this</code> variable as an instance of <code>BaseController</code>.
+</p>
+<pre class="language-php line-numbers">
+	<code>
+		new Nox\Router\DynamicRoute(
+			requestMethod: &quot;get&quot;,
+			requestPath: &quot;/sitemap&quot;,
+			isRegex: false,
+			onRender: Closure::fromCallable(function() {
+				/** @var \Nox\Router\BaseController $this */
+				$router = $this::$requestHandler->router;
+				return json_encode($router->getAllAccessibleRouteURIs());
+			}),
+		);
+	</code>
+</pre>
+}

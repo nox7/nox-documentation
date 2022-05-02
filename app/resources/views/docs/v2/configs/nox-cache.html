@@ -1,0 +1,28 @@
+@Layout = "v2/docs-page.php"
+@Head{
+<title>Static Cache Configuration - Nox PHP Framework</title>
+}
+@Body{
+<h1>Static File Cache Configuration</h1>
+<p>
+	nox-cache.json defines the cache lifetime of certain mime types. Any mimes that are not present will not be sent a cache header. The header that is sent to browsers to define cache is <code>cache-control: max-age=%d</code> where %d is the time in seconds from the nox-cache.json.
+</p>
+<p>
+	A standard nox-cache.json file will look as follows
+</p>
+<pre class="language-plain line-numbers">
+	<code>
+		{
+		  "text/css":2592000,
+		  "image/jpeg":2592000,
+		  "image/gif":2592000,
+		  "image/png":2592000,
+		  "image/webp":2592000,
+		  "image/svg+xml":2592000,
+		  "application/pdf":5184000,
+		  "text/javascript":1296000
+		}
+
+	</code>
+</pre>
+}

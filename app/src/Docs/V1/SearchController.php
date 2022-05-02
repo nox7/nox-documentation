@@ -29,7 +29,7 @@
 			}
 
 			return Renderer::renderView(
-				viewFileName: "search.php",
+				viewFileName: "docs/v1/search.php",
 				viewScope: [
 					"pageResults" => $pageResults,
 					"query" => $query,

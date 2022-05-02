@@ -8,7 +8,7 @@
 
 	$query = $viewScope['query'];
 ?>
-@Layout = "docs-v1-page-no-search.php"
+@Layout = "v1/docs-v1-page-no-search.php"
 @Head{
 <title>Search the Nox Framework</title>
 }

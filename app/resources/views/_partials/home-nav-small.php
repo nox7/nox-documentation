@@ -1,3 +1,6 @@
+<?php
+	use NoxDocumentation\NoxDocumentation;
+?>
 <nav id="home-nav-small-bar">
 	<div>
 		<button type="button" id="home-small-nav-trigger-button">
@@ -15,11 +18,11 @@
 		<img height="64" alt="Nox PHP framework logo" src="/images/logo-s.png">
 	</div>
 	<div class="links">
-		<a href="/docs/1.x" title="Nox framework documentation">Documentation</a>
-		<a href="/docs/1.x/quick-start" title="Introduction to the framework">Quick Start</a>
+		<a href="/docs/<?= NoxDocumentation::CURRENT_VERSION ?>" title="Nox framework documentation">Documentation</a>
+		<a href="/docs/<?= NoxDocumentation::CURRENT_VERSION ?>/quick-start" title="Introduction to the framework">Quick Start</a>
 	</div>
 	<div class="search-container">
-		<form id="home-small-nav-search" action="/docs/1.x/search" method="get">
+		<form id="home-small-nav-search" action="/docs/<?= NoxDocumentation::CURRENT_VERSION ?>/search" method="get">
 			<div id="home-small-nav-search-field-container">
 				<label for="home-small-nav-search-input"><i class="bi bi-search"></i></label>
 				<input name="query" type="text" id="home-small-nav-search-input" placeholder="Search docs">
