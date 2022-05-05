@@ -34,13 +34,13 @@
 			return Renderer::renderView("docs/v2/installation.html");
 		}
 
-		#[Route("GET", "/nox-configs")]
+		#[Route("GET", "/nox-configuration")]
 		public function noxConfigsMainView(): string
 		{
 			return Renderer::renderView("docs/v2/configs/main.html");
 		}
 
-		#[Route("GET", "/nox-configs/json-config")]
+		#[Route("GET", "/nox-configuration/json-config")]
 		public function noxJSONConfigView(): string
 		{
 			return Renderer::renderView("docs/v2/configs/nox-json.html");
