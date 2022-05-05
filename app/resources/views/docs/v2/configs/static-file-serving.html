@@ -1,0 +1,52 @@
+@Layout = "v2/docs-page.php"
+@Head{
+<title>Serving Static Files - Nox PHP Framework</title>
+}
+@Body{
+<h1>Serving Static Files</h1>
+<p>
+	The location of where Nox will look for your static files (images, CSS, JavaScript, etc) is configured, by default, in the <code>nox-request.php</code> file by a specific call shown below.
+</p>
+<pre>
+	<code class="language-php line-numbers">
+		$nox-&gt;addStaticDirectory(
+			uriStub: &quot;/&quot;,
+			directoryPath: __DIR__ . &quot;/resources/static&quot;,
+		);
+	</code>
+</pre>
+<p>
+	This means that any URIs that start with "/" (which all do) will first check if that URI path is actually a file bath relative to the directoryPath parameter (app/resources/static for default installations).
+</p>
+<p>
+	Additionally, only recognized MIME types will be considered serveable files. Just because a file path is valid and exists <strong>does not mean it will not return a 404/not found</strong> if you have not registered that file extension as a valid MIME type Nox can understand.
+</p>
+<p>
+	<a class="btn btn-primary" href="#">
+		<i class="bi bi-file-binary-fill"></i>
+		<span>More on Registering File Extensions</span>
+	</a>
+</p>
+<h2>Multiple Static Directories</h2>
+<p>
+	By default, only one static directory check is registered and its registered as the root path of all requests. You can, however, virtually map a URI stub to a separate static directory.
+</p>
+<p>
+	For example, if you want all URIs that start with /backend to check a different static folder than your standard front-end pages, you can adjust the uriStub and change the directoryPath parameters.
+</p>
+<pre class="mb-3">
+	<code class="language-php line-numbers">
+		$nox-&gt;addStaticDirectory(
+			uriStub: &quot;/&quot;,
+			directoryPath: __DIR__ . &quot;/resources/static&quot;,
+		);
+		$nox-&gt;addStaticDirectory(
+			uriStub: &quot;/backend&quot;,
+			directoryPath: __DIR__ . &quot;/resources/admin-statics&quot;,
+		);
+	</code>
+</pre>
+<p>
+	These directives and settings would go in the <code>nox-request.php</code> project file before a call to <code>$nox-.router->processRequestAsStaticFile()</code> is made.
+</p>
+}

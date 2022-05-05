@@ -40,40 +40,11 @@
 			return Renderer::renderView("docs/v2/configs/main.html");
 		}
 
-		#[Route("GET", "/nox-configuration/json-config")]
-		public function noxJSONConfigView(): string
-		{
-			return Renderer::renderView("docs/v2/configs/nox-json.html");
-		}
 
-		#[Route("GET", "/nox-configs/cache")]
-		public function noxJSONCacheView(): string
-		{
-			return Renderer::renderView("docs/v2/configs/nox-cache.html");
-		}
-
-		#[Route("GET", "/nox-configs/mime")]
-		public function noxJSONMimeView(): string
-		{
-			return Renderer::renderView("docs/v2/configs/nox-mime.html");
-		}
-
-		#[Route("GET", "/nox-configs/environment")]
-		public function noxEnvironmentView(): string
-		{
-			return Renderer::renderView("docs/v2/configs/nox-env.html");
-		}
-
-		#[Route("GET", "/nox-configs/request")]
+		#[Route("GET", "/nox-configs/static-file-serving")]
 		public function noxRequestView(): string
 		{
-			return Renderer::renderView("docs/v2/configs/nox-request.html");
-		}
-
-		#[Route("GET", "/static-file-serving")]
-		public function staticFileServingView(): string
-		{
-			return Renderer::renderView("docs/v2/static-file-serving.html");
+			return Renderer::renderView("docs/v2/configs/static-file-serving.html");
 		}
 
 		#[Route("GET", "/routing")]
