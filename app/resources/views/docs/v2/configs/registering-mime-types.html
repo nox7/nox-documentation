@@ -1,0 +1,27 @@
+@Layout = "v2/docs-page.php"
+@Head{
+<title>Registering Mime Types - Nox PHP Framework</title>
+}
+@Body{
+<h1>Registering Mime Types - Setting Up File Extensions</h1>
+<p>
+	Nox's static filing serving system will only serve files with file extensions that are registered to a known mime type. For example, if you would not like PDF files to be served on your website then you would simply make sure there is no map for a .pdf file extension to a mime type in the mime registry.
+</p>
+<h2>Registering Mimes</h2>
+<p>
+	Typically, registration is done in the nox-request.php file; and, of course, the code registering the extension-to-mime would be before any call to read/serve files.
+</p>
+<pre>
+	<code class="language-php line-numbers">
+		// $nox is the instance of Nox from nox-request.php
+		// This would allow .css files to be served and served with a text/css content-type response
+		$nox-&gt;mapExtensionToMimeType("css", "text/css");
+
+		// Also serve SCS .map files as text/plain
+		$nox-&gt;mapExtensionToMimeType("map", "text/plain");
+	</code>
+</pre>
+<p>
+	You can map any file extension to any mime you require.
+</p>
+}

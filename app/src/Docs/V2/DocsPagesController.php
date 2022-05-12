@@ -47,6 +47,18 @@
 			return Renderer::renderView("docs/v2/configs/static-file-serving.html");
 		}
 
+		#[Route("GET", "/nox-configs/static-file-cache-control")]
+		public function noxStaticFileCacheControl(): string
+		{
+			return Renderer::renderView("docs/v2/configs/static-file-cache-control.html");
+		}
+
+		#[Route("GET", "/nox-configs/registering-mime-types")]
+		public function noxRegisteringMimeTypes(): string
+		{
+			return Renderer::renderView("docs/v2/configs/registering-mime-types.html");
+		}
+
 		#[Route("GET", "/routing")]
 		public function routeView(): string
 		{

@@ -1,0 +1,22 @@
+@Layout = "v2/docs-page.php"
+@Head{
+<title>Static File Cache Control - Nox PHP Framework</title>
+}
+@Body{
+<h1>Static File Cache Control</h1>
+<p>
+	In typical PHP projects, the server configuration file (htaccess or nginx config file) would control the cache age for specified MIME types.
+</p>
+<p>
+	Because Nox has a static file serving system, you can use PHP to control the cache of static files by their MIME types.
+</p>
+<pre>
+	<code class="language-php line-numbers">
+		// Adds a 60 day cache to image/png content types
+		$nox-&gt;addCacheTimeForMime("image/png", 86400 * 60);
+	</code>
+</pre>
+<p>
+	The cache age is in seconds. In this case, 86400 are the seconds in a day multiplied by 60 for 60 days of caching for PNG images.
+</p>
+}
