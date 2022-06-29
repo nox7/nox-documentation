@@ -19,7 +19,7 @@
 	</div>
 	<div class="links">
 		<a href="/docs/<?= NoxDocumentation::CURRENT_MAJOR_VERSION ?>" title="Nox framework documentation">Documentation</a>
-		<a href="/docs/<?= NoxDocumentation::CURRENT_MAJOR_VERSION ?>/quick-start" title="Introduction to the framework">Quick Start</a>
+		<a href="/docs/2/installation" title="Introduction to the framework">Quick Start</a>
 	</div>
 	<div class="search-container">
 		<form id="home-small-nav-search" action="/docs/<?= NoxDocumentation::CURRENT_MAJOR_VERSION ?>/search" method="get">

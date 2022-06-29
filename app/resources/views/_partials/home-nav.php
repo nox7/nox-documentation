@@ -7,7 +7,7 @@
 	</div>
 	<div class="links">
 		<a href="/docs/<?= NoxDocumentation::CURRENT_MAJOR_VERSION ?>" title="Nox framework documentation">Documentation</a>
-		<a href="/docs/<?= NoxDocumentation::CURRENT_MAJOR_VERSION ?>/quick-start" title="Introduction to the framework">Quick Start</a>
+		<a href="/docs/2/installation" title="Introduction to the framework">Quick Start</a>
 		<a target="_blank" href="https://github.com/nox7/nox" title="GitHub repository for Nox">
 			<i class="bi bi-github pe-2"></i>
 			<span>GitHub</span>
