@@ -27,11 +27,11 @@
 					DocsPagesController::class
 				]);
 				$pageSearch->loadEligibleRoutes();
-				$pageResults = $pageSearch->getRoutesForQuery($query);
+				$pageResults = $pageSearch->getEligibleRoutesForQuery($query);
 			}
 
 			return Renderer::renderView(
-				viewFileName: "search.php",
+				viewFileName: "docs/v2/search.php",
 				viewScope: [
 					"pageResults" => $pageResults,
 					"query" => $query,
