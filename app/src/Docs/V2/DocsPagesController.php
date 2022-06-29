@@ -65,6 +65,12 @@
 			return Renderer::renderView("docs/v2/configs/define-views-directory.html");
 		}
 
+		#[Route("GET", "/nox-configs/defining-layouts-directory")]
+		public function noxRegisteringLayoutsDirectory(): string
+		{
+			return Renderer::renderView("docs/v2/configs/defining-layouts-directory.html");
+		}
+
 		#[Route("GET", "/routing")]
 		public function routeView(): string
 		{
