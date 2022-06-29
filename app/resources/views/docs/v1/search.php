@@ -4,6 +4,7 @@
 
 	use Utils\PageSearch;
 
+	/** @var PageSearch\EligibleRoute[] $pageResults */
 	$pageResults = $viewScope['pageResults'];
 
 	$query = $viewScope['query'];
@@ -21,19 +22,18 @@
 	<div class="py-3">
 		<?php
 			if (!empty($pageResults)){
-				/** @var array{uri: string, body: string, title: string} $pageResult */
-				foreach($pageResults as $pageResult){
+				foreach($pageResults as $eligibleRoute){
 					$truncatedBody = PageSearch::getTruncatedBodyOfFirstQueryMatch(
-						body: $pageResult['body'],
+						body: $eligibleRoute->body,
 						query: $query,
 						highlightResult: true,
 					);
 				?>
 				<page-result>
-					<h3><a href="<?= $pageResult['uri']; ?>">
-						<?= $pageResult['title']; ?>
+					<h3><a href="<?= $eligibleRoute->uri; ?>">
+						<?= $eligibleRoute->title; ?>
 					</a></h3>
-					<p class="uri"><?= $pageResult['uri']; ?></p>
+					<p class="uri"><?= $eligibleRoute->uri; ?></p>
 					<p class="body-preview"><?= $truncatedBody ?></p>
 				</page-result>
 				<?php

@@ -25,7 +25,7 @@
 					DocsPagesController::class
 				]);
 				$pageSearch->loadEligibleRoutes();
-				$pageResults = $pageSearch->getRoutesForQuery($query);
+				$pageResults = $pageSearch->getEligibleRoutesForQuery($query);
 			}
 
 			return Renderer::renderView(
