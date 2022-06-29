@@ -59,6 +59,12 @@
 			return Renderer::renderView("docs/v2/configs/registering-mime-types.html");
 		}
 
+		#[Route("GET", "/nox-configs/defining-views-directory")]
+		public function noxRegisteringViewsDirectory(): string
+		{
+			return Renderer::renderView("docs/v2/configs/define-views-directory.html");
+		}
+
 		#[Route("GET", "/routing")]
 		public function routeView(): string
 		{

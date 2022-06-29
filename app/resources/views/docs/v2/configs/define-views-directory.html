@@ -1,0 +1,32 @@
+@Layout = "v2/docs-page.php"
+@Head{
+<title>Defining a Views Directory</title>
+}
+@Body{
+<h1>Static File Cache Control</h1>
+<p>
+	When you serve a view file from a standard controller result, the Nox Renderer needs to know where to look for your view file relative path.
+</p>
+<p>
+	A typical call to the <code>Renderer::renderView</code> will need a viewFileName parameter - which is a string relative path to a view file from your configured views directory.
+</p>
+<p>
+	In the file you setup the Nox object (typically in nox-request.php) you would need to have the following definition before processing routes.
+</p>
+<pre>
+	<code class="language-php line-numbers">
+		$nox-&gt;setViewsDirectory(__DIR__ . "/resources/views");
+	</code>
+</pre>
+<p>
+	Then, when you call the renderView method of the Renderer, you would provide a relative path. Let's assume there is a folder in your views called <code>about</code> and a file called <code>main.php</code>.
+</p>
+<pre>
+	<code class="language-php line-numbers">
+		// $renderedPage is a string of the full HTML render of that main.php file
+		$renderedPage = \Nox\RenderEngine\Renderer::renderView(
+			viewFileName: "about/main.php",
+		);
+	</code>
+</pre>
+}
