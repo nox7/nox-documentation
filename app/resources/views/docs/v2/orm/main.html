@@ -5,36 +5,34 @@
 @Body{
 <h1>Object Relational Mapping with Abyss</h1>
 <p>
-	Abyss is the name given to Nox's MySQL ORM class. Unlike Laravel's Eloquent, Abyss aims to be a single-transparency window to the MySQL driver underneath. In short, using Abyss <strong>will</strong> make your life easier by allowing instantiating objects to map to MySQL tables, rows, and columns; but you won't have the feeling of a larger learning curve or that there is a lot going on under the hood.
+	Abyss is the name given to Nox's MySQL ORM class. Unlike Laravel's Eloquent, Abyss aims to be a single-transparency window to the MySQL driver underneath. In short, using Abyss <strong>will</strong> make your life easier by allowing instantiating objects to map to MySQL tables, rows, and columns; but you won't have the feeling of a larger learning curve or that there is a lot going on under the hood. Additionally, Abyss <strong>only supports MySQL</strong> and doesn't use PDO under the hood.
 </p>
 <p>
 	The use of Abyss is mainly governed by creating your own models and that ModelClass instances to interface with the database. Rarely will you need to use the <code>Abyss</code> class on its own.
 </p>
 <p>
-	Abyss reads the database connection parameters from the <code>nox-env.php</code> file. <strong>Abyss is not necessary to use the Nox framework</strong>. You can simply comment out the <code>Abyss::loadConfig</code> line in your nox-request.php file to disable Abyss.
+	In the standard example project, Abyss is loaded in nox-request.php and credentials are provided via a DatabaseCredentials object. You can register multiple database credentials to allow Abyss to interface with multiple databases. This is useful if your application or project spans multiple databases - as your models in Nox allow you to set which database that model has objects in.
 </p>
-<toc-container></toc-container>
 <h2>Loading Abyss Configuration</h2>
 <p>
 	By default, your nox-request.php file will come with an abyss configuration already preloaded.
 </p>
 <pre class="language-php line-numbers">
 	<code>
-		Abyss::loadConfig(__DIR__);
+		Abyss::addCredentials(new DatabaseCredentials(
+			host: NoxEnv::MYSQL_HOST,
+			username: NoxEnv::MYSQL_USERNAME,
+			password: NoxEnv::MYSQL_PASSWORD,
+			database: NoxEnv::MYSQL_DB_NAME,
+			port: NoxEnv::MYSQL_PORT,
+		));
 	</code>
 </pre>
-<p>
-	The <code>loadConfig</code> argument should always be the app root directory (not the server root) which has the <code>nox-env.php</code> file in it. If the NoxEnv class is not loaded, Abyss will attempt to require it in the directory passed to loadConfig's first argument.
-</p>
-<p>
-	In a standard installation, you will not need to call <code>loadConfig</code> anywhere but where it is already called for you, in nox-request.php.
-</p>
-
 <h2>Synchronizing Your Models to the Database</h2>
 <p>
 	In some frameworks this is called your "migrations". Nox prefers to consider naming it model synchronization because you are matching up your Nox models into your MySQL database.
 </p>
 <p>
-	See <a href="/docs/1.x/how-to/syncing-models">Sync'ing Your Models</a> for a tutorial/explanation on how to do this.
+	See <a href="/docs/2/how-to/syncing-models">Sync'ing Your Models</a> for a tutorial/explanation on how to do this. By default, it is done by calling a CLI script - however, the code is portable into your standard application process should you wish it to be able to be called elsewhere.
 </p>
 }
