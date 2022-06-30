@@ -1,6 +1,6 @@
 @Layout = "v2/docs-page.php"
 @Head{
-<title>Model Class Instances - Nox PHP Framework</title>
+<title>Model Class Instances</title>
 }
 @Body{
 <h1>Model Class Instances - What are They?</h1>
@@ -10,11 +10,11 @@
 <toc-container></toc-container>
 <h2>How Does a Model Know Which Class Represents It?</h2>
 <p>
-	If you look back at the <a href="/docs/1.x/orm/models">models documentation page</a>, you will notice there is a property in the example model code that looks like this.
+	If you look back at the <a href="/docs/2/orm/models">models documentation page</a>, you will notice there is a property in the example model code that looks like this.
 </p>
 <pre class="language-php line-numbers">
 	<code>
-		private string $representingClassName = "User";
+		private string $representingClassName = User::class;
 	</code>
 </pre>
 <p>
@@ -25,21 +25,20 @@
 	In the model documentation page, the example code shows a <code>UsersModel</code> being created. Now say you want to create a class to represent a single user in the database, be able to query them, update them, create them, etc.
 </p>
 <p>
-	Below is a barebones example that follows the properties outlined in the models documentation page.
+	Below is a bare-bones example that follows the properties outlined in the models' documentation page.
 </p>
 <pre class="language-php line-numbers">
 	<code>
 		&lt;?php
-
-			// Require the UsersModel
-			require_once __DIR__ . "/../models/UsersModel.php";
-
 			use Nox\ORM\Interfaces\ModelInstance;
 			use Nox\ORM\Interfaces\MySQLModelInterface;
 			use Nox\ORM\ModelClass;
 
 			class User extends ModelClass implements ModelInstance
 			{
+				// Because the $id is defined as the primary column, default it to null.
+				// Upon calling the save method on this model - or using a query to get this model class
+				// this property will be hydrated by the ORM.
 				public ?int $id = null;
 				public string $name;
 				public string $email;
@@ -112,7 +111,7 @@
 </pre>
 <h2>Fetching/Querying a Collection of ModelClass Instances</h2>
 <p>
-	To fetch a collection of model classes (Users in this case), you will want to use the static method <code>::query()</code>. Read more in-depth on this in the <a href="/docs/1.x/orm/making-queries">making queries on model classes</a> documentation page.
+	To fetch a collection of model classes (Users in this case), you will want to use the static method <code>::query()</code>. Read more in-depth on this in the <a href="/docs/2/orm/making-queries">making queries on model classes</a> documentation page.
 </p>
 <h2>Saving a Collection</h2>
 <p>
@@ -133,7 +132,7 @@
 <p>
 	This will either create a database entry for each individual user, or save them via an UPDATE query.
 </p>
-<h2 id="queries">Deleting a ModelClass Instance from the Database</h2>
+<h2>Deleting a ModelClass Instance from the Database</h2>
 <p>
 	To delete a model class instance (a row) from the database, simply call <code>delete()</code> on the instance. This will require that the instance have a primary key defined in its representing model and that the primary key be non-null.
 </p>
