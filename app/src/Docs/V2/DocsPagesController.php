@@ -158,12 +158,6 @@
 			return Renderer::renderView("docs/v2/orm/query-clauses.html");
 		}
 
-		#[Route("GET", "/how-to/fetching-available-routes")]
-		public function fetchAvailableRoutesView(): string
-		{
-			return Renderer::renderView("docs/v2/how-to/fetching-all-available-routes.html");
-		}
-
 		#[Route("GET", "/how-to/rest-api-processing")]
 		public function processingRESTfulAPIs(): string
 		{
