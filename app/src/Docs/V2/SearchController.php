@@ -18,8 +18,7 @@
 		#[Route("GET", "/search")]
 		public function searchView(): string
 		{
-			$request = new Request();
-			$query = trim($request->getGetValue("query", ""));
+			$query = $_GET['query'] ?? "";
 			$pageResults = [];
 
 			if (!empty($query)) {
