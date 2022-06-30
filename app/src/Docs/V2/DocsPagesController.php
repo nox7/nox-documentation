@@ -158,6 +158,12 @@
 			return Renderer::renderView("docs/v2/orm/query-clauses.html");
 		}
 
+		#[Route("GET", "/request-processing/payloads")]
+		public function processingRequestPayloads(): string
+		{
+			return Renderer::renderView("docs/v2/request-processing/payloads.html");
+		}
+
 		#[Route("GET", "/how-to/rest-api-processing")]
 		public function processingRESTfulAPIs(): string
 		{

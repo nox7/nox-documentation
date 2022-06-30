@@ -5,21 +5,22 @@
 @Body{
 <h1>Processing RESTful Requests as APIs</h1>
 <p>
-	By nature, PHP will only auto-consume the request body of a POST request. However, REST APIs allow us to utilize methods such as PATCH, PUT, and DELETE to signify more information about a request's intents.
+	By nature, PHP will only auto-consume the request body of a POST request. However, REST APIs allow us to utilize methods such as PATCH, PUT, and DELETE to signify more information about a request's intent.
 </p>
 <p>
-	Nox includes the ability to consume the request body of multipart/form-data (As of 1.5.0, JSON consumption is not processed by Nox and you can easily do this manually by decoding the php://input).
+	Nox includes the ability to consume the request body of multipart/form-data and JSON content types through the RequestPayload abstraction.
 </p>
 <h2>Setting Up a Consumption Method</h2>
 <p>
-	From within a controller, you can mark a method with a ProcessRequestBody attribute that will prefill the BaseController's $requestPayload property with a key=>value array of the request's form data.
+	RequestPayload abstractions are not used by default - Nox won't attempt to parse request bodies for all resources - you have to let Nox know a chosen route should try and parse the request body with a ProcessRequestBody attribute.
 </p>
 <pre class="language-php line-numbers">
 	<code>
-		use Nox\Router\Attributes\Route
-		use Nox\Router\Attributes\Controller
-		use Nox\Router\BaseController
-		use Nox\Http\Attributes\ProcessRequestBody
+		use Nox\Router\Attributes\Route;
+		use Nox\Router\Attributes\Controller;
+		use Nox\Router\BaseController;
+		use Nox\Http\Attributes\ProcessRequestBody;
+		use Nox\Http\Request;
 
 		#[Controller]
 		public class PageController extends BaseController{
@@ -30,14 +31,23 @@
 			#[Route("PUT", "/page")]
 			#[ProcessRequestBody]
 			public function getAccessibleURIs(): string{
-				$payload = BaseController::$requestPayload;
+				$payload = Request::getRequestPayload();
 
-				// $payload is an array of keys and values from your PUT'd form data
+				try{
+					$namePayload = $payload->getTextPayload("name');
+				}catch(NoPayloadFound $e){
+					return $e->getMessage();
+				}
+
+				return "Got payload 'name' = {$namePayload->contents}!";
 			}
 
 		}
 	</code>
 </pre>
+<div class="my-3 alert alert-info">
+	Read more about <a href="">getting data out of the payload</a>.
+</div>
 <p>
 	Your front-end JavaScript may look something like the below, which would PUT to that API endpoint.
 </p>
