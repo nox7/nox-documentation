@@ -99,7 +99,7 @@
 		public function fetchAvailableRoutesRedirect(): Redirect
 		{
 			return new Redirect(
-				path: "/docs/1.x/how-to/fetching-available-routes",
+				path: "/docs/2/how-to/fetching-available-routes",
 				statusCode: 301,
 			);
 		}

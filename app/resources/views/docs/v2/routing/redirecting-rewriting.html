@@ -5,7 +5,10 @@
 @Body{
 <h1>Redirecting &amp; Rewriting Requests</h1>
 <p>
-	An attribute route (non-dynamic routes) can utilize return types to determine if a request should be redirected or rewritten. The difference is one will change the URL location the users is on (and depending on the status code, may be cached) and one will simply show a different view but keep the URL the same.
+	An attribute route can utilize return types to determine if a request should be redirected or rewritten. The difference is one will change the URL location the user is on (and depending on the status code, may be cached) and one will simply show a different view but keep the URL the same.
+</p>
+<p>
+	Why would you use one over the other? One example of a rewrite instead of a redirect is when an unauthorized user tries to access a resource they don't have access to. You would want to return a 403 HTTP response code and then show a view that signifies they don't have access to it.
 </p>
 <h2>Performing a Redirect</h2>
 <pre class="language-php line-numbers">
@@ -18,11 +21,11 @@
 		#[Controller]
 		class HomeController extends BaseController{
 
-			#[Route("GET", "/")]
+			#[Route("GET", "/redirect-me")]
 			public function homeView(): Redirect{
 				// Redirect them
 				return new Redirect(
-					path: "/some-other-page",
+					path: "/another-page",
 					statusCode: 302, // 302 is temporary and doesn't cache - 301 would cache the result
 				);
 			}
@@ -32,7 +35,7 @@
 </pre>
 <h2>Rewriting a Request</h2>
 <p>
-	Sometimes you simply want to perform a rewrite and, under the hood, cause the request to route to a different route method. Why would you want to do this? Maybe you want to show your /403 route result for an unauthorized user visiting a settings page.
+	Rewrites allow you to show another view at a destination route - but won't change the URL in the address bar.
 </p>
 <pre class="language-php line-numbers">
 	<code>
@@ -46,18 +49,32 @@
 
 			#[Route("GET", "/settings")]
 			public function settingsView(): string | Rewrite{
-				// Jargon variable, but is for an example
+				// This variable is just an example - it's not defined
 				if ($userIsNotLoggedIn){
 					return new Rewrite(
 						path: "/403",
 						statusCode: 403,
 					);
 				}else{
-					return "Welcome, user!";
+					return "<p>Welcome, user!</p>";
 				}
 			}
 
 		}
 	</code>
 </pre>
+<h2>Class Anatomy of Rewrite and Redirect</h2>
+<pre class="language-php line-numbers">
+	<code>
+		Redirect(string $path, int $statusCode = 302)
+	</code>
+</pre>
+<pre class="language-php line-numbers">
+	<code>
+		Rewrite(string $path, int $statusCode = 302)
+	</code>
+</pre>
+<p>
+	Both of these objects inform the Nox router to perform special actions based on the path and status code used to construct them.
+</p>
 }
