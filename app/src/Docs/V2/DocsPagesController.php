@@ -71,6 +71,12 @@
 			return Renderer::renderView("docs/v2/configs/defining-layouts-directory.html");
 		}
 
+		#[Route("GET", "/nox-configs/setting-project-source-directory")]
+		public function noxRegisteringSourceDirectory(): string
+		{
+			return Renderer::renderView("docs/v2/configs/setting-source-code-directory.html");
+		}
+
 		#[Route("GET", "/routing")]
 		public function routeView(): string
 		{
