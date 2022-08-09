@@ -1,22 +1,15 @@
 @import "../bootstrap/functions";
-@import "../bootstrap/variables";
-
 @import "variables";
+@import "../bootstrap/variables";
 
 $theme-colors: map-merge($theme-colors, $custom-theme-colors);
 
 @import "../bootstrap/bootstrap";
+@import "global";
 @import "nav/main";
-@import "footer";
-@import "page";
-@import "toc";
-@import "content-decoration";
-@import "content-flair";
-@import "sidebar";
+@import "footer/main";
 @import "home/main";
 @import "search/main";
-@import "docs/v1/main";
 
-img{
-	max-width:100%;
-}
+// Docs
+@import "docs/main";

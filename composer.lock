@@ -4,8 +4,62 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2b7f751708a565bf19120aed7f1bced",
+    "content-hash": "659a32814eabdb9b6c1a9c9a30e7554c",
     "packages": [
+        {
+            "name": "erusev/parsedown",
+            "version": "v2.0.0-beta-1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "32278afaf36c758de026b66661d3afd6dfbea743"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/32278afaf36c758de026b66661d3afd6dfbea743",
+                "reference": "32278afaf36c758de026b66661d3afd6dfbea743",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^7.1||^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.0.0",
+                "infection/infection": "^0.25.0",
+                "phpunit/phpunit": "^9.3.11||^8.5.21||^7.5.20",
+                "roave/infection-static-analysis-plugin": "^1.10.0",
+                "vimeo/psalm": "^4.10.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Erusev\\Parsedown\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "Parser for Markdown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "markdown",
+                "parser"
+            ],
+            "support": {
+                "issues": "https://github.com/erusev/parsedown/issues",
+                "source": "https://github.com/erusev/parsedown/tree/v2.0.0-beta-1"
+            },
+            "time": "2022-05-21T21:40:24+00:00"
+        },
         {
             "name": "nox7/nox",
             "version": "2.0.0-beta12",
@@ -51,7 +105,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "beta",
-    "stability-flags": [],
+    "stability-flags": {
+        "erusev/parsedown": 10
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
