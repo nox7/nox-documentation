@@ -57,4 +57,24 @@
 				],
 			);
 		}
+
+		/**
+		 * @throws ParseError
+		 * @throws ViewFileDoesNotExist
+		 * @throws LayoutDoesNotExist
+		 */
+		#[Route("GET", "/layouts")]
+		public function layoutsView(): string
+		{
+			return Renderer::renderView(
+				viewFileName: "docs/v2/page.php",
+				viewScope:[
+					"title"=>"Nox Layouts - View File Layouts",
+					"description"=>"Nox layouts are a way to encompass the contents of a view into a reusable component.",
+					"body"=>ParsedownWrapper::get()->toHtml(
+						file_get_contents(__DIR__ . "/../../../resources/documentation/v2/layouts.md")
+					),
+				],
+			);
+		}
 	}
