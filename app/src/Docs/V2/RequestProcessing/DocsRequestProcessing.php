@@ -1,6 +1,6 @@
 <?php
 
-	namespace NoxDocumentation\Docs\V2\Views;
+	namespace NoxDocumentation\Docs\V2\RequestProcessing;
 
 	use Nox\Http\Redirect;
 	use Nox\RenderEngine\Exceptions\LayoutDoesNotExist;
@@ -14,8 +14,8 @@
 	use NoxDocumentation\ParsedownWrapper\ParsedownWrapper;
 
 	#[Controller]
-	#[RouteBase("/docs/2.0/views")]
-	class DocsViewsController extends BaseController
+	#[RouteBase("/docs/2.0/request-processing")]
+	class DocsRequestProcessing extends BaseController
 	{
 
 		/**
@@ -23,16 +23,16 @@
 		 * @throws ViewFileDoesNotExist
 		 * @throws LayoutDoesNotExist
 		 */
-		#[Route("GET", "/")]
-		public function viewsHomeView(): string
+		#[Route("GET", "/payloads")]
+		public function requestProcessingPayloadsView(): string
 		{
 			return Renderer::renderView(
 				viewFileName: "docs/v2/page.php",
 				viewScope:[
-					"title"=>"View Files in Nox MVC",
-					"description"=>"Views are the public pages or responses that a user is given to an HTTP request.",
+					"title"=>"Processing Request Payloads",
+					"description"=>"Natively PHP only supports GET and POST payload processing. Nox allows you to process payloads of any HTTP method.",
 					"body"=>ParsedownWrapper::get()->toHtml(
-						file_get_contents(__DIR__ . "/../../../../resources/documentation/v2/views/main.md")
+						file_get_contents(__DIR__ . "/../../../../resources/documentation/v2/request-processing/payloads.md")
 					),
 				],
 			);
@@ -43,16 +43,16 @@
 		 * @throws ViewFileDoesNotExist
 		 * @throws LayoutDoesNotExist
 		 */
-		#[Route("GET", "/view-scope")]
-		public function viewScopeView(): string
+		#[Route("GET", "/json-responses")]
+		public function jsonRequestResponseView(): string
 		{
 			return Renderer::renderView(
 				viewFileName: "docs/v2/page.php",
 				viewScope:[
-					"title"=>"Sending Data to a View from a Controller - View Scopes",
-					"description"=>"A view's view scope is data that has been sent directly from the controller for use in an individual view file.",
+					"title"=>"Supported JSON Responses to Requests",
+					"description"=>"Nox has a few helper classes to make responding in JSON more understandable and seamless.",
 					"body"=>ParsedownWrapper::get()->toHtml(
-						file_get_contents(__DIR__ . "/../../../../resources/documentation/v2/views/view-scope.md")
+						file_get_contents(__DIR__ . "/../../../../resources/documentation/v2/request-processing/json-response.md")
 					),
 				],
 			);

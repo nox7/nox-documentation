@@ -1,6 +1,6 @@
 <?php
 
-	namespace NoxDocumentation\Docs\V2\Configs;
+	namespace NoxDocumentation\Docs\V2\Routing;
 
 	use Nox\Http\Redirect;
 	use Nox\RenderEngine\Exceptions\LayoutDoesNotExist;
