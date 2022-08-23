@@ -4,20 +4,20 @@
 	</section>
 	<section id="docs-version-selector-container">
 		<form id="docs-version-selector-form">
-			<select class="form-control" name="version">
-				<option value="2.0">2.0</option>
-			</select>
+			<?php
+				include __DIR__ . "/../_documentation-version-select.html";
+			?>
 		</form>
 	</section>
 	<link-group>
 		<link-wrap>
-			<a href="/docs/2.0/" title="Routing">Docs Home</a>
+			<a href="/docs/2.0/" title="Documentation home">Docs Home</a>
 		</link-wrap>
 		<link-wrap>
 			<a href="/docs/2.0/installation" title="Quick Start">Installation &amp; Example Project</a>
 		</link-wrap>
 		<link-wrap>
-			<a href="/docs/2.0/nox-configs" title="Quick Start">Configuring Nox</a>
+			<a href="/docs/2.0/nox-configs" title="Configuring the Nox framework">Configuring Nox</a>
 			<link-wrap>
 				<a href="/docs/2.0/nox-configs/static-file-serving" title="Serving static files">
 					<span>Serving Static Files</span>
