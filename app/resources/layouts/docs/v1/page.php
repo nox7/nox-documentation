@@ -19,7 +19,7 @@
 		<?php include __DIR__ . "/../../../views/_partials/google-tag-manager-noscript.html"; ?>
 		<?php include __DIR__ . "/../../../views/_partials/navigation/nav-large.php"; ?>
 		<page-container id="docs-page-container">
-			<?php include __DIR__ . "/../../../views/_partials/v2/_sidebar.php"; ?>
+			<?php include __DIR__ . "/../../../views/_partials/v1/_sidebar.php"; ?>
 			<main>
 				<?= $htmlBody ?>
 			</main>
