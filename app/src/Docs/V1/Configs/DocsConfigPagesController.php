@@ -11,10 +11,12 @@
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
 	use Nox\Router\BaseController;
+	use NoxDocumentation\Docs\SetDocVersion;
 	use NoxDocumentation\ParsedownWrapper\ParsedownWrapper;
 
 	#[Controller]
 	#[RouteBase("/docs/1.x/nox-configs")]
+	#[SetDocVersion("1.0")]
 	class DocsConfigPagesController extends BaseController
 	{
 

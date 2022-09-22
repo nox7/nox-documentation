@@ -1,6 +1,10 @@
 <?php
 	/** @var string $htmlHead */
 	/** @var string $htmlBody */
+
+	use NoxDocumentation\Docs\DocsVersion;
+
+	$docsVersion = DocsVersion::$currentPageVersion;
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
