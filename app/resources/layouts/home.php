@@ -8,9 +8,12 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<?php include __DIR__ . "/../views/_partials/_global-head.html"; ?>
-		<link rel="stylesheet" href="/external/prism/prism.css">
-		<script defer src="/external/prism/prism.js"></script>
+        <link rel="stylesheet" href="/external/highlightjs/styles/dark.min.css">
+        <script src="/external/highlightjs/highlight.min.js"></script>
 		<?= $htmlHead ?>
+        <script>
+            hljs.highlightAll();
+        </script>
 	</head>
 	<body>
 		<?php include __DIR__ . "/../views/_partials/google-tag-manager-noscript.html"; ?>
