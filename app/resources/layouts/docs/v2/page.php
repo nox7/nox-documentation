@@ -1,6 +1,10 @@
 <?php
 	/** @var string $htmlHead */
 	/** @var string $htmlBody */
+
+	use NoxDocumentation\Docs\DocsVersion;
+
+	$docsVersion = DocsVersion::$currentPageVersion;
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -16,6 +20,7 @@
 		</script>
 	</head>
 	<body>
+		<input type="hidden" id="docs-version" value="<?= $docsVersion ?>">
 		<?php include __DIR__ . "/../../../views/_partials/google-tag-manager-noscript.html"; ?>
 		<?php include __DIR__ . "/../../../views/_partials/navigation/nav-large.php"; ?>
 		<page-container id="docs-page-container">

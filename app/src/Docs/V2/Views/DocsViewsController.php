@@ -11,10 +11,12 @@
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
 	use Nox\Router\BaseController;
+	use NoxDocumentation\Docs\SetDocVersion;
 	use NoxDocumentation\ParsedownWrapper\ParsedownWrapper;
 
 	#[Controller]
 	#[RouteBase("/docs/2.0/views")]
+	#[SetDocVersion("2.0")]
 	class DocsViewsController extends BaseController
 	{
 

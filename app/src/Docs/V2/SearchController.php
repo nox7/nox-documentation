@@ -8,10 +8,12 @@
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
 	use Nox\Router\BaseController;
+	use NoxDocumentation\Docs\SetDocVersion;
 	use Utils\PageSearch;
 
 	#[Controller]
-	#[RouteBase("/docs/2")]
+	#[RouteBase("/docs/2.0")]
+	#[SetDocVersion("2.0")]
 	class SearchController extends BaseController
 	{
 
