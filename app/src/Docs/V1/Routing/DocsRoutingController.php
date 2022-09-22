@@ -24,78 +24,77 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/")]
-		public function configsHomeView(): string
+		public function routingMainView(): string
 		{
 			return Renderer::renderView(
-				viewFileName: "docs/v2/page.php",
+				viewFileName: "docs/v1/page.php",
 				viewScope:[
-					"title"=>"Setting Up Controller Routes in Nox",
-					"description"=>"Nox PHP allows you to use attribute MVC routes in its framework. Learn how here.",
+					"title"=>"Routing - Nox PHP Framework",
+					"description"=>"",
 					"body"=>ParsedownWrapper::get()->toHtml(
-						file_get_contents(__DIR__ . "/../../../../resources/documentation/v2/routing/routing.md")
+						file_get_contents(__DIR__ . "/../../../../resources/documentation/v1/routing/main.md")
 					),
 				],
 			);
 		}
 
-		/**
-		 * @throws ParseError
-		 * @throws ViewFileDoesNotExist
-		 * @throws LayoutDoesNotExist
-		 */
-		#[Route("GET", "/redirecting-rewriting")]
-		public function redirectsRewritesView(): string
-		{
-			return Renderer::renderView(
-				viewFileName: "docs/v2/page.php",
-				viewScope:[
-					"title"=>"Redirecting & Rewriting Nox Requests",
-					"description"=>"Routes can return a Rewrite or a Redirect object to tell the router to re-perform a request with a different URI.",
-					"body"=>ParsedownWrapper::get()->toHtml(
-						file_get_contents(__DIR__ . "/../../../../resources/documentation/v2/routing/redirecting-rewriting.md")
-					),
-				],
-			);
-		}
+        /**
+         * @throws ParseError
+         * @throws ViewFileDoesNotExist
+         * @throws LayoutDoesNotExist
+         */
+        #[Route("GET", "/redirecting-rewriting")]
+        public function redirectsRewritesView(): string
+        {
+            return Renderer::renderView(
+                viewFileName: "docs/v1/page.php",
+                viewScope:[
+                    "title"=>"Redirecting &amp; Rewriting Requests - Nox PHP Framework",
+                    "description"=>"",
+                    "body"=>ParsedownWrapper::get()->toHtml(
+                        file_get_contents(__DIR__ . "/../../../../resources/documentation/v1/routing/redirecting-rewriting.md")
+                    ),
+                ],
+            );
+        }
 
-		/**
-		 * @throws ParseError
-		 * @throws ViewFileDoesNotExist
-		 * @throws LayoutDoesNotExist
-		 */
-		#[Route("GET", "/custom-route-method-attribute")]
-		public function customRouteAttributes(): string
-		{
-			return Renderer::renderView(
-				viewFileName: "docs/v2/page.php",
-				viewScope:[
-					"title"=>"Custom Nox Router-Recognized Attributes",
-					"description"=>"Learn how to create custom PHP attributes that the Nox router will recognize.",
-					"body"=>ParsedownWrapper::get()->toHtml(
-						file_get_contents(__DIR__ . "/../../../../resources/documentation/v2/routing/custom-attributes.md")
-					),
-				],
-			);
-		}
+        /**
+         * @throws ParseError
+         * @throws ViewFileDoesNotExist
+         * @throws LayoutDoesNotExist
+         */
+        #[Route("GET", "/custom-route-method-attribute")]
+        public function customAttributesView(): string
+        {
+            return Renderer::renderView(
+                viewFileName: "docs/v1/page.php",
+                viewScope:[
+                    "title"=>"Custom Method Attributes - Nox PHP Framework",
+                    "description"=>"",
+                    "body"=>ParsedownWrapper::get()->toHtml(
+                        file_get_contents(__DIR__ . "/../../../../resources/documentation/v1/routing/custom-method-attributes.md")
+                    ),
+                ],
+            );
+        }
 
-		/**
-		 * @throws ParseError
-		 * @throws ViewFileDoesNotExist
-		 * @throws LayoutDoesNotExist
-		 */
-		#[Route("GET", "/dynamic-routing")]
-		public function dynamicRoutesView(): string
-		{
-			return Renderer::renderView(
-				viewFileName: "docs/v2/page.php",
-				viewScope:[
-					"title"=>"Dynamic Routes in Nox",
-					"description"=>"Dynamic routes are runtime defined routes that do not use PHP 8 attributes.",
-					"body"=>ParsedownWrapper::get()->toHtml(
-						file_get_contents(__DIR__ . "/../../../../resources/documentation/v2/routing/dynamic-routes.md")
-					),
-				],
-			);
-		}
-
+        /**
+         * @throws ParseError
+         * @throws ViewFileDoesNotExist
+         * @throws LayoutDoesNotExist
+         */
+        #[Route("GET", "/dynamic-routing")]
+        public function dynamicRoutingView(): string
+        {
+            return Renderer::renderView(
+                viewFileName: "docs/v1/page.php",
+                viewScope:[
+                    "title"=>"Dynamic Routing - Nox PHP Framework",
+                    "description"=>"",
+                    "body"=>ParsedownWrapper::get()->toHtml(
+                        file_get_contents(__DIR__ . "/../../../../resources/documentation/v1/routing/dynamic-routing.md")
+                    ),
+                ],
+            );
+        }
 	}

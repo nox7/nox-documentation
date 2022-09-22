@@ -63,18 +63,38 @@
 		 * @throws ViewFileDoesNotExist
 		 * @throws LayoutDoesNotExist
 		 */
-		#[Route("GET", "/layouts")]
-		public function layoutsView(): string
+		#[Route("GET", "/static-file-serving")]
+		public function staticFileServingView(): string
 		{
 			return Renderer::renderView(
-				viewFileName: "docs/v2/page.php",
+				viewFileName: "docs/v1/page.php",
 				viewScope:[
-					"title"=>"Nox Layouts - View File Layouts",
-					"description"=>"Nox layouts are a way to encompass the contents of a view into a reusable component.",
+					"title"=>"Serving Static Files - Nox PHP Framework",
+					"description"=>"",
 					"body"=>ParsedownWrapper::get()->toHtml(
-						file_get_contents(__DIR__ . "/../../../resources/documentation/v2/layouts.md")
+						file_get_contents(__DIR__ . "/../../../resources/documentation/v1/static-file-serving.md")
 					),
 				],
 			);
 		}
+
+        /**
+         * @throws ParseError
+         * @throws ViewFileDoesNotExist
+         * @throws LayoutDoesNotExist
+         */
+        #[Route("GET", "/layouts")]
+        public function layoutsView(): string
+        {
+            return Renderer::renderView(
+                viewFileName: "docs/v1/page.php",
+                viewScope:[
+                    "title"=>"View Layouts - Nox PHP Framework",
+                    "description"=>"",
+                    "body"=>ParsedownWrapper::get()->toHtml(
+                        file_get_contents(__DIR__ . "/../../../resources/documentation/v1/layouts.md")
+                    ),
+                ],
+            );
+        }
 	}
