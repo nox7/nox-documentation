@@ -9,6 +9,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="/external/highlightjs/styles/dark.min.css">
 		<script src="/external/highlightjs/highlight.min.js"></script>
+		<script type="module" src="/js/Docs/VersionSelector/VersionSelector.js"></script>
 		<?php include __DIR__ . "/../../../views/_partials/_global-head.html"; ?>
 		<?= $htmlHead ?>
 		<script>
