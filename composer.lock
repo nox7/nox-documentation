@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7b5e14a91dd0b722197193538b24f452",
+    "content-hash": "9bfb66c8478db092f50a4271b13a5b49",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -62,16 +62,16 @@
         },
         {
             "name": "nox7/nox",
-            "version": "2.0.0",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nox7/nox.git",
-                "reference": "d6a5d9db19688328dbf1151277f234fbf8d5cb4f"
+                "reference": "b8d28dc7409005823d7273587e59836f5c98a8a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nox7/nox/zipball/d6a5d9db19688328dbf1151277f234fbf8d5cb4f",
-                "reference": "d6a5d9db19688328dbf1151277f234fbf8d5cb4f",
+                "url": "https://api.github.com/repos/nox7/nox/zipball/b8d28dc7409005823d7273587e59836f5c98a8a8",
+                "reference": "b8d28dc7409005823d7273587e59836f5c98a8a8",
                 "shasum": ""
             },
             "require": {
@@ -97,17 +97,15 @@
             "description": "A straightforward and dependency-light web framework with minimal syntax learning curves.",
             "support": {
                 "issues": "https://github.com/nox7/nox/issues",
-                "source": "https://github.com/nox7/nox/tree/2.0.0"
+                "source": "https://github.com/nox7/nox/tree/2.0.6"
             },
-            "time": "2022-08-11T18:39:44+00:00"
+            "time": "2022-09-22T23:03:11+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "beta",
-    "stability-flags": {
-        "erusev/parsedown": 10
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

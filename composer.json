@@ -1,9 +1,9 @@
 {
     "require": {
         "php": ">=8.1",
-        "nox7/nox": "2.0.0",
+        "nox7/nox": "2.0.6",
       "ext-simplexml": "*",
-        "erusev/parsedown": "^2.0@beta"
+        "erusev/parsedown": "*"
     },
-    "minimum-stability": "beta"
+  "minimum-stability": "beta"
 }
