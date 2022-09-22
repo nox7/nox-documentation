@@ -32,7 +32,7 @@
 						The Nox PHP MVC framework aims to keep invasive, opinionated patterns to a minimum. Apart from a standard MVC paradigm, the way your application's microservices and features are implemented is left up to you. Nox provides the tools you need to build a successful MVC PHP application.
 					</p>
 					<p>
-						<a class="btn btn-primary" href="/docs/1.x">
+						<a class="btn btn-primary" href="/docs/2.0">
 							<i class="bi bi-code-slash"></i>
 							<span>Go to the Docs</span>
 						</a>
@@ -53,9 +53,9 @@
 							<img alt="Screenshot of attribute routing in Nox PHP" src="/images/nox-routing-preview.png">
 						</div>
 						<div class="col-xl">
-							<h2>Why PHP 8?</h2>
+							<h2>Why PHP >=8.1?</h2>
 							<p>
-								By being progressive with the minimum PHP version support, the end result syntax that Nox implements is more streamlined, understandable, and compares better to larger-scale application frameworks - such as Java Spring. Nox makes use of PHP 8's attributes/decorators to handle request routing on your controller methods. This allows you to avoid having to manually add methods to a router class. Routes simply work out-of-the-box with PHP method attributes. See how MVC routing with PHP 8 attributes is done by viewing the <a href="/docs/1.x/routing" title="MVC routing in Nox PHP">routing docs</a>.
+								By being progressive with the minimum PHP version support, the end result syntax that Nox implements is more streamlined, understandable, and compares better to larger-scale application frameworks - such as Java Spring. Nox makes use of PHP 8's attributes/decorators to handle request routing on your controller methods. This allows you to avoid having to manually add methods to a router class. Routes simply work out-of-the-box with PHP method attributes. See how MVC routing with PHP 8 attributes is done by viewing the <a href="/docs/2.0/routing" title="MVC routing in Nox PHP">routing docs</a>.
 							</p>
 						</div>
 					</div>
@@ -82,10 +82,8 @@
 								</p>
 								<div class="my-3">
 									<pre>
-										<code class="language-php line-numbers">
-											$username = $_POST['username'] ?? null;
-											$result = $mysqli->query("SELECT id FROM `users` WHERE `username` = '" . $username ."');
-										</code>
+										<code class="language-php line-numbers">$username = $_POST['username'] ?? null;
+$result = $mysqli->query("SELECT id FROM `users` WHERE `username` = '" . $username ."');</code>
 									</pre>
 								</div>
 								<p>
@@ -96,18 +94,16 @@
 								</p>
 								<div class="my-3">
 									<pre>
-										<code class="language-php line-numbers">
-											#[Route("POST", "/change-username")]
-											public function changeUserName(): void{
-												$username = $_POST['username'] ?? null;
-												$columnQuery = new ColumnQuery()
-													->where("username","=",$username);
+										<code class="language-php line-numbers">#[Route("POST", "/change-username")]
+public function changeUserName(): void{
+	$username = $_POST['username'] ?? null;
+	$columnQuery = new ColumnQuery()
+		->where("username","=",$username);
 
-												$user = User::queryOne($columnQuery);
-												$user->username = "New Username here";
-												$user->save();
-											}
-										</code>
+	$user = User::queryOne($columnQuery);
+	$user->username = "New Username here";
+	$user->save();
+}</code>
 									</pre>
 								</div>
 								<p>
@@ -115,14 +111,14 @@
 								</p>
 								<div class="my-2">
 									<ul>
-										<li><a title="Abyss" href="/docs/1.x/orm">Abyss ORM</a></li>
-										<li><a title="Models" href="/docs/1.x/orm/models">Models</a></li>
-										<li><a title="Model instance classes" href="/docs/1.x/orm/model-class-instances">Model Instances</a></li>
-										<li><a title="Making queries on models" href="/docs/1.x/orm/making-queries">Making Queries</a></li>
+										<li><a title="Abyss" href="/docs/2.0/orm">Abyss ORM</a></li>
+										<li><a title="Models" href="/docs/2.0/orm/models">Models</a></li>
+										<li><a title="Model instance classes" href="/docs/2.0/orm/model-class-instances">Model Instances</a></li>
+										<li><a title="Making queries on models" href="/docs/2.0/orm/making-queries">Making Queries</a></li>
 									</ul>
 								</div>
 								<p>
-									<a class="btn btn-lg btn-primary" title="Start using Nox PHP - the MVC framework for modern PHP" href="/docs/1.x/quick-start">
+									<a class="btn btn-lg btn-primary" title="Start using Nox PHP - the MVC framework for modern PHP" href="/docs/2.0/installation">
 										<i class="bi bi-play-btn-fill"></i>
 										<span>Get Started with Nox - the modern PHP MVC framework</span>
 									</a>
