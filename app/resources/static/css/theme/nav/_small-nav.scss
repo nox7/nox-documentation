@@ -1,4 +1,4 @@
-@keyframes open-small-home-nav {
+@keyframes open-small-nav {
 	0%{
 		right:-290px;
 	}
@@ -7,14 +7,14 @@
 	}
 }
 
-#home-nav-small-bar{
+#nav-small-bar{
 	display:none;
 	background-color:map-get($theme-colors, dark);
-	justify-content: flex-end;
+	justify-content: space-between;
 	padding:0 1rem;
 }
 
-#home-nav-small-backdrop{
+#nav-small-backdrop{
 	position:fixed;
 	display:none;
 	top:0;
@@ -24,7 +24,7 @@
 	background-color:rgba(0,0,0,0.35);
 }
 
-#home-small-nav-trigger-button{
+#small-nav-trigger-button{
 	background:none;
 	border:unset;
 	padding:0.15rem;
@@ -40,7 +40,7 @@
 	}
 }
 
-#home-nav-small{
+#nav-small{
 	display:none;
 	position:absolute;
 	right:0;
@@ -51,7 +51,7 @@
 	min-height:100vh;
 
 	&.open{
-		animation:open-small-home-nav 130ms 1;
+		animation:open-small-nav 130ms 1;
 		animation-fill-mode: backwards;
 		display:flex;
 		flex-direction:column;
@@ -79,11 +79,11 @@
 	}
 }
 
-#home-small-nav-search{
+#small-nav-search{
 	display: flex;
 	align-items: center;
 
-	#home-small-nav-search-field-container{
+	#small-nav-search-field-container{
 		display: flex;
 		color: #646464;
 		align-items: center;
@@ -116,7 +116,7 @@
 	}
 }
 
-#home-small-nav-close-button{
+#small-nav-close-button{
 	background:none;
 	color:white;
 	position:absolute;
@@ -127,7 +127,7 @@
 }
 
 @media (max-width:map-get($grid-breakpoints, xl)){
-	#home-nav-small-bar{
+	#nav-small-bar{
 		display:flex;
 	}
 }

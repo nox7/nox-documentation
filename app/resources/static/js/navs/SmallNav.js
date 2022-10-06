@@ -1,9 +1,9 @@
-class SmallNavHome{
+class SmallNav{
 	constructor(){
-		this.navContainer = document.querySelector("#home-nav-small");
-		this.backdrop = document.querySelector("#home-nav-small-backdrop");
-		this.triggerButton = document.querySelector("#home-small-nav-trigger-button");
-		this.closeButton = document.querySelector("#home-small-nav-close-button");
+		this.navContainer = document.querySelector("#nav-small");
+		this.backdrop = document.querySelector("#nav-small-backdrop");
+		this.triggerButton = document.querySelector("#small-nav-trigger-button");
+		this.closeButton = document.querySelector("#small-nav-close-button");
 
 		this.triggerButton.addEventListener("click", () => {
 			this.onTriggerButtonClicked();
@@ -39,4 +39,4 @@ class SmallNavHome{
 	}
 }
 
-export default new SmallNavHome();
+export default new SmallNav();
