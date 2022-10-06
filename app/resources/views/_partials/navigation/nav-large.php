@@ -17,7 +17,7 @@
 		</a>
 	</div>
 	<div class="search-container">
-		<form id="home-top-search" action="/docs/<?= NoxDocumentation::CURRENT_MAJOR_VERSION ?>/search" method="get">
+		<form id="home-top-search" action="/docs/2.0/search" method="get">
 			<div id="home-top-search-field-container">
 				<label for="home-top-search-input"><i class="bi bi-search"></i></label>
 				<input name="query" type="text" id="home-top-search-input" placeholder="Search docs">
