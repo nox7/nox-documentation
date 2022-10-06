@@ -10,8 +10,15 @@
 #nav-small-bar{
 	display:none;
 	background-color:map-get($theme-colors, dark);
-	justify-content: space-between;
 	padding:0 1rem;
+
+	&.docs{
+		justify-content: space-between;
+	}
+
+	&:not(.docs){
+		justify-content: flex-end;
+	}
 }
 
 #nav-small-backdrop{

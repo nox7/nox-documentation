@@ -1,7 +1,13 @@
 <?php
-	use NoxDocumentation\NoxDocumentation;
+
 ?>
-<nav id="nav-small-bar">
+<nav id="nav-small-bar" class="docs">
+	<div>
+		<button type="button" id="small-nav-docs-drawer-trigger-button">
+			<i class="bi bi-list"></i>
+			<span>Docs</span>
+		</button>
+	</div>
 	<div>
 		<button type="button" id="small-nav-trigger-button">
 			<span>Menu</span>
