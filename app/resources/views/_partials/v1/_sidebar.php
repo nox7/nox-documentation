@@ -1,4 +1,4 @@
-<aside id="docs-sidebar">
+<aside id="docs-sidebar" class="small-nav-closed">
 	<section id="docs-sidebar-heading-container">
 		<h4>Documentation</h4>
 	</section>

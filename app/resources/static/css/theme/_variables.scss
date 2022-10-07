@@ -1,6 +1,6 @@
 $home-nav-height:68px;
-$admin-nav-height:38px;
-$docs-v1-sidebar-width:285px;
+$small-nav-height: 60px;
+$docs-sidebar-width: 270px;
 
 $nox-purple:#cc2dcc;
 $nav-bg-color:#171717;
@@ -21,3 +21,10 @@ $card-bg: $main-bg-color;
 $custom-theme-colors: (
 	primary:$primary,
 );
+
+$z-index-map:(
+	small-nav-backdrop:99,
+	small-nav-drawer:100,
+	docs-small-nav-backdrop:99,
+	docs-small-nav-drawer:100,
+)
