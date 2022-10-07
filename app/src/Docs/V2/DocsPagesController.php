@@ -11,6 +11,8 @@
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
 	use Nox\Router\BaseController;
+	use NoxDocumentation\Docs\DocumentationFilePath;
+	use NoxDocumentation\Docs\Queryable;
 	use NoxDocumentation\Docs\SetDocVersion;
 	use NoxDocumentation\ParsedownWrapper\ParsedownWrapper;
 
@@ -66,6 +68,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/layouts")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../resources/documentation/v2/layouts.md")]
 		public function layoutsView(): string
 		{
 			return Renderer::renderView(

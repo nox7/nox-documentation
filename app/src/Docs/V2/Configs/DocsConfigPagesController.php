@@ -2,7 +2,6 @@
 
 	namespace NoxDocumentation\Docs\V2\Configs;
 
-	use Nox\Http\Redirect;
 	use Nox\RenderEngine\Exceptions\LayoutDoesNotExist;
 	use Nox\RenderEngine\Exceptions\ParseError;
 	use Nox\RenderEngine\Exceptions\ViewFileDoesNotExist;
@@ -11,6 +10,8 @@
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
 	use Nox\Router\BaseController;
+	use NoxDocumentation\Docs\DocumentationFilePath;
+	use NoxDocumentation\Docs\Queryable;
 	use NoxDocumentation\Docs\SetDocVersion;
 	use NoxDocumentation\ParsedownWrapper\ParsedownWrapper;
 
@@ -26,6 +27,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/config/main.md")]
 		public function configsHomeView(): string
 		{
 			return Renderer::renderView(
@@ -46,6 +49,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/static-file-serving")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/config/static-file-serving.md")]
 		public function staticFileServiceView(): string
 		{
 			return Renderer::renderView(
@@ -66,6 +71,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/registering-mime-types")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/config/registering-mime-types.md")]
 		public function registeringMimeTypesView(): string
 		{
 			return Renderer::renderView(
@@ -86,6 +93,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/static-file-cache-control")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/config/static-file-cache-control.md")]
 		public function staticFileCacheControlView(): string
 		{
 			return Renderer::renderView(
@@ -106,6 +115,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/defining-views-directory")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/config/defining-views-directory.md")]
 		public function viewDefiningView(): string
 		{
 			return Renderer::renderView(
@@ -126,6 +137,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/defining-layouts-directory")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/config/defining-layouts-directory.md")]
 		public function layoutDefiningView(): string
 		{
 			return Renderer::renderView(
@@ -146,6 +159,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/setting-project-source-directory")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/config/setting-source-code-directory.md")]
 		public function projectSourceDirectoryView(): string
 		{
 			return Renderer::renderView(

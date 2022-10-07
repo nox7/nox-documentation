@@ -10,6 +10,8 @@
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
 	use Nox\Router\BaseController;
+	use NoxDocumentation\Docs\DocumentationFilePath;
+	use NoxDocumentation\Docs\Queryable;
 	use NoxDocumentation\Docs\SetDocVersion;
 	use NoxDocumentation\ParsedownWrapper\ParsedownWrapper;
 
@@ -25,6 +27,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/abyss/main.md")]
 		public function abyssHomeView(): string
 		{
 			return Renderer::renderView(
@@ -45,6 +49,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/models")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/abyss/models.md")]
 		public function abyssModelsView(): string
 		{
 			return Renderer::renderView(
@@ -65,6 +71,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/model-class-instances")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/abyss/model-class-instances.md")]
 		public function abyssModelClassInstancesView(): string
 		{
 			return Renderer::renderView(
@@ -85,6 +93,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/making-queries")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/abyss/making-queries.md")]
 		public function abyssMakingQueriesView(): string
 		{
 			return Renderer::renderView(
@@ -105,6 +115,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/synchronizing-models")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/abyss/synchronizing-models.md")]
 		public function abyssSynchronizingModelsViews(): string
 		{
 			return Renderer::renderView(

@@ -11,6 +11,8 @@
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
 	use Nox\Router\BaseController;
+	use NoxDocumentation\Docs\DocumentationFilePath;
+	use NoxDocumentation\Docs\Queryable;
 	use NoxDocumentation\Docs\SetDocVersion;
 	use NoxDocumentation\ParsedownWrapper\ParsedownWrapper;
 
@@ -26,6 +28,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/routing/routing.md")]
 		public function configsHomeView(): string
 		{
 			return Renderer::renderView(
@@ -46,6 +50,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/redirecting-rewriting")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/routing/redirecting-rewriting.md")]
 		public function redirectsRewritesView(): string
 		{
 			return Renderer::renderView(
@@ -66,6 +72,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/custom-route-method-attribute")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/routing/custom-attributes.md")]
 		public function customRouteAttributes(): string
 		{
 			return Renderer::renderView(
@@ -86,6 +94,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/dynamic-routing")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/routing/dynamic-routes.md")]
 		public function dynamicRoutesView(): string
 		{
 			return Renderer::renderView(

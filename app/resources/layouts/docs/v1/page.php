@@ -24,6 +24,7 @@
 		<input type="hidden" id="docs-version" value="<?= $docsVersion ?>">
 		<?php include __DIR__ . "/../../../views/_partials/google-tag-manager-noscript.html"; ?>
 		<?php include __DIR__ . "/../../../views/_partials/navigation/nav-large.php"; ?>
+		<?php include __DIR__ . "/../../../views/_partials/navigation/nav-small-docs.php"; ?>
 		<page-container id="docs-page-container">
 			<?php include __DIR__ . "/../../../views/_partials/v1/_sidebar.php"; ?>
 			<main>

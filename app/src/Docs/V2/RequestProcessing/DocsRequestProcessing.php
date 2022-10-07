@@ -11,6 +11,8 @@
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
 	use Nox\Router\BaseController;
+	use NoxDocumentation\Docs\DocumentationFilePath;
+	use NoxDocumentation\Docs\Queryable;
 	use NoxDocumentation\Docs\SetDocVersion;
 	use NoxDocumentation\ParsedownWrapper\ParsedownWrapper;
 
@@ -26,6 +28,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/payloads")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/request-processing/payloads.md")]
 		public function requestProcessingPayloadsView(): string
 		{
 			return Renderer::renderView(
@@ -46,6 +50,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/json-responses")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v2/request-processing/json-response.md")]
 		public function jsonRequestResponseView(): string
 		{
 			return Renderer::renderView(
