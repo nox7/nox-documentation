@@ -20,10 +20,12 @@ class SearchResult{
 		template.classList.add("search-result-item");
 		template.innerHTML = `
 		    <div class="title-container">
-		    	<h2>${this.title}</h2>
+		    	<h2>
+					<a href="${this.route}">${this.title}</a>
+				</h2>
 		    </div>
 		    <div class="route-container">
-		    	<a href="${this.route}">${this.route}</>
+		    	<a href="${this.route}">${this.route}</a>
 		    </div>
 		    <div class="description-container">
 		    	<p>${this.description}</p>
@@ -37,3 +39,5 @@ class SearchResult{
 		SearchResult.container.append(this.dom);
 	}
 }
+
+export default SearchResult;

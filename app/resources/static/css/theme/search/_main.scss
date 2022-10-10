@@ -1,3 +1,36 @@
 #search-page{
 	width:100%;
 }
+
+.search-result-item{
+	padding:1rem;
+	border-radius:0.25rem;
+	background-color:$secondary-bg-color;
+	margin-bottom:1rem;
+	h2{
+		margin:0 !important;
+		font-size:1.35rem;
+		a{
+			text-decoration: none;
+			color:$primary !important;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+	}
+
+	.route-container{
+		margin:0.25rem 0;
+		a{
+			font-size:0.9rem;
+			text-decoration:none;
+			color:$success;
+		}
+	}
+
+	.description-container{
+		p{
+			margin-bottom:0;
+		}
+	}
+}

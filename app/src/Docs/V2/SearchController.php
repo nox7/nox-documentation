@@ -36,10 +36,14 @@
 		#[UseJSON]
 		public function performQuery(): JSONResult
 		{
-			$query = $_GET['query'] ?? "";
+			$query = trim($_GET['query'] ?? "");
 
-			$reflectionMethods = SearchService::query(DocsVersions::_2_0->value, $query);
-			$searchResults = SearchService::parseQueryResultInSearchResults($reflectionMethods);
+			if (!empty($query)) {
+				$reflectionMethods = SearchService::query(DocsVersions::_2_0->value, $query);
+				$searchResults = SearchService::parseQueryResultInSearchResults($reflectionMethods);
+			}else{
+				$searchResults = [];
+			}
 
 			return new JSONSuccess([
 				"searchResults"=>$searchResults,
