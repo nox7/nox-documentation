@@ -10,6 +10,8 @@
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
 	use Nox\Router\BaseController;
+	use NoxDocumentation\Docs\DocumentationFilePath;
+	use NoxDocumentation\Docs\Queryable;
 	use NoxDocumentation\Docs\SetDocVersion;
 	use NoxDocumentation\ParsedownWrapper\ParsedownWrapper;
 
@@ -25,6 +27,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v1/orm/main.md")]
 		public function ormHomeView(): string
 		{
 			return Renderer::renderView(
@@ -45,12 +49,14 @@
          * @throws LayoutDoesNotExist
          */
         #[Route("GET", "/models")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v1/orm/models.md")]
         public function ormModelsView(): string
         {
             return Renderer::renderView(
                 viewFileName: "docs/v1/page.php",
                 viewScope:[
-                    "title"=>"Abyss (Nox ORM) - Nox PHP Framework",
+                    "title"=>"Abyss Database Models - Nox PHP Framework",
                     "description"=>"",
                     "body"=>ParsedownWrapper::get()->toHtml(
                         file_get_contents(__DIR__ . "/../../../../resources/documentation/v1/orm/models.md")
@@ -65,6 +71,8 @@
          * @throws LayoutDoesNotExist
          */
         #[Route("GET", "/model-class-instances")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v1/orm/model-class-instances.md")]
         public function ormModelClassInstancesView(): string
         {
             return Renderer::renderView(
@@ -85,6 +93,8 @@
          * @throws LayoutDoesNotExist
          */
         #[Route("GET", "/making-queries")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v1/orm/making-queries.md")]
         public function ormModelClassQueriesView(): string
         {
             return Renderer::renderView(
@@ -105,6 +115,8 @@
          * @throws LayoutDoesNotExist
          */
         #[Route("GET", "/query-clauses")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v1/orm/query-clauses.md")]
         public function ormModelQueryClausesView(): string
         {
             return Renderer::renderView(

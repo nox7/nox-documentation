@@ -11,6 +11,8 @@
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
 	use Nox\Router\BaseController;
+	use NoxDocumentation\Docs\DocumentationFilePath;
+	use NoxDocumentation\Docs\Queryable;
 	use NoxDocumentation\Docs\SetDocVersion;
 	use NoxDocumentation\ParsedownWrapper\ParsedownWrapper;
 
@@ -26,6 +28,8 @@
 		 * @throws LayoutDoesNotExist
 		 */
 		#[Route("GET", "/syncing-models")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v1/how-to/syncing-models.md")]
 		public function syncingModelsView(): string
 		{
 			return Renderer::renderView(
@@ -46,6 +50,8 @@
          * @throws LayoutDoesNotExist
          */
         #[Route("GET", "/fetching-available-routes")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v1/how-to/fetching-all-available-routes.md")]
         public function fetchAvailableRoutesView(): string
         {
             return Renderer::renderView(
@@ -66,6 +72,8 @@
          * @throws LayoutDoesNotExist
          */
         #[Route("GET", "/rest-api-processing")]
+		#[Queryable]
+		#[DocumentationFilePath(__DIR__ . "/../../../../resources/documentation/v1/how-to/rest-api-processing.md")]
         public function restAPIProcessingView(): string
         {
             return Renderer::renderView(
