@@ -3,6 +3,7 @@
 	require_once __DIR__ . "/../app/nox-env.php";
 	require_once __DIR__ . "/../vendor/autoload.php";
 
+	use NoxDocumentation\Docs\DocsVersions;
 	use NoxDocumentation\Docs\SearchService;
 	use PHPUnit\Framework\TestCase;
 
@@ -18,7 +19,7 @@
 		{
 			// Currently, there are only two documents that reference $viewScope. If there are ever more, this
 			// test needs to be updated.
-			$reflectionMethods = SearchService::query("2.0", "\$viewScope");
+			$reflectionMethods = SearchService::query(DocsVersions::_2_0->value, "\$viewScope");
 
 			$this->assertNotEmpty($reflectionMethods);
 			$this->assertCount(2, $reflectionMethods);
