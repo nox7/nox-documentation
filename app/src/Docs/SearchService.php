@@ -4,6 +4,7 @@
 	use Nox\ClassLoader\ClassLoader;
 	use Nox\Router\Attributes\Route;
 	use Nox\Router\Attributes\RouteBase;
+	use ReflectionException;
 	use ReflectionMethod;
 
 	class SearchService{
@@ -20,10 +21,9 @@
 		}
 
 		/**
-		 * @param string $docsVersion Example, "2.0" or "1.0"
 		 * @return ReflectionMethod[]
 		 */
-		public static function query(string $docsVersion, string $query): array{
+		public static function getAllQueryableControllerMethods(?string $docsVersion = null): array{
 			$controllerClassReflections = ClassLoader::$controllerClassReflections;
 
 			// Fetch all the controller classes that have SetDocVersion attributes
@@ -36,14 +36,24 @@
 				);
 
 				if (!empty($classAttributes)){
-					/** @var SetDocVersion $instanceOfFirstDocVersionAttribute */
-					$instanceOfFirstDocVersionAttribute = $classAttributes[0]->newInstance();
-					if ($instanceOfFirstDocVersionAttribute->version === $docsVersion){
+					if ($docsVersion !== null) {
+						/** @var SetDocVersion $instanceOfFirstDocVersionAttribute */
+						$instanceOfFirstDocVersionAttribute = $classAttributes[0]->newInstance();
+						if ($instanceOfFirstDocVersionAttribute->version === $docsVersion) {
+							$methods = $classReflection->getMethods(
+								filter: ReflectionMethod::IS_PUBLIC,
+							);
+
+							foreach ($methods as $method) {
+								$methodsToTestForQueryable[] = $method;
+							}
+						}
+					}else{
 						$methods = $classReflection->getMethods(
 							filter: ReflectionMethod::IS_PUBLIC,
 						);
 
-						foreach($methods as $method){
+						foreach ($methods as $method) {
 							$methodsToTestForQueryable[] = $method;
 						}
 					}
@@ -63,6 +73,16 @@
 					$methodsToQuery[] = $reflectionMethod;
 				}
 			}
+
+			return $methodsToQuery;
+		}
+
+		/**
+		 * @param string $docsVersion Example, "2.0" or "1.0"
+		 * @return ReflectionMethod[]
+		 */
+		public static function query(string $docsVersion, string $query): array{
+			$methodsToQuery = self::getAllQueryableControllerMethods($docsVersion);
 
 			// Go through the methods to query, get the documentation file that method represents
 			// search that file for the query string
@@ -91,7 +111,7 @@
 		/**
 		 * @param ReflectionMethod[] $reflectionMethods
 		 * @return SearchResult[]
-		 * @throws \ReflectionException
+		 * @throws ReflectionException
 		 */
 		public static function parseQueryResultInSearchResults(array $reflectionMethods): array{
 			$searchResults = [];

@@ -15,7 +15,6 @@
 	use NoxDocumentation\Docs\SetDocVersion;
 
 	#[Controller]
-	#[RouteBase("/docs/1.x")]
 	#[RouteBase("/docs/1.0")]
 	#[SetDocVersion("1.0")]
 	class SearchController extends BaseController
