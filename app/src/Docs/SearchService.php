@@ -37,9 +37,13 @@
 					/** @var SetDocVersion $instanceOfFirstDocVersionAttribute */
 					$instanceOfFirstDocVersionAttribute = $classAttributes[0]->newInstance();
 					if ($instanceOfFirstDocVersionAttribute->version === $docsVersion){
-						$methodsToTestForQueryable[] = $classReflection->getMethods(
+						$methods = $classReflection->getMethods(
 							filter: ReflectionMethod::IS_PUBLIC,
 						);
+
+						foreach($methods as $method){
+							$methodsToTestForQueryable[] = $method;
+						}
 					}
 				}
 			}
