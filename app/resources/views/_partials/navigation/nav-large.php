@@ -1,5 +1,8 @@
 <?php
-	use NoxDocumentation\NoxDocumentation;
+
+	use NoxDocumentation\Docs\DocsVersion;
+
+	$docsVersion = DocsVersion::$currentPageVersion;
 ?>
 <nav id="home-nav">
 	<div class="logo-c">
@@ -17,11 +20,17 @@
 		</a>
 	</div>
 	<div class="search-container">
-		<form id="home-top-search" action="/docs/2.0/search" method="get">
-			<div id="home-top-search-field-container">
-				<label for="home-top-search-input"><i class="bi bi-search"></i></label>
-				<input name="query" type="text" id="home-top-search-input" placeholder="Search docs">
-			</div>
-		</form>
+		<?php
+			if (!empty($docsVersion)){
+				?>
+				<form id="home-top-search" action="/docs/<?= $docsVersion ?>/search" method="get">
+					<div id="home-top-search-field-container">
+						<label for="home-top-search-input"><i class="bi bi-search"></i></label>
+						<input name="query" type="text" id="home-top-search-input" placeholder="Search docs">
+					</div>
+				</form>
+				<?php
+			}
+		?>
 	</div>
 </nav>
