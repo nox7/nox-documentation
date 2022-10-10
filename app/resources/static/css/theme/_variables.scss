@@ -1,0 +1,31 @@
+$home-nav-height:68px;
+$small-nav-height: 60px;
+$docs-sidebar-width: 270px;
+
+$nox-purple:#cc2dcc;
+$nav-bg-color:#171717;
+$footer-bg-color:#171717;
+$main-bg-color:#212529;
+$main-bg-text-color:#d8c6db;
+$secondary-bg-color:#191c1f;
+$secondary-bg-text-color:#d8c6db;
+
+$primary:darken($nox-purple, 5%);
+$input-group-addon-bg: $secondary-bg-color;
+$input-bg: $main-bg-color;
+$input-color:$main-bg-text-color;
+$input-btn-focus-color: transparentize($nox-purple,0.8);
+$card-cap-bg: $secondary-bg-color;
+$card-border-color: rgba(255,255,255, 0.08);
+$card-bg: $main-bg-color;
+
+$custom-theme-colors: (
+	primary:$primary,
+);
+
+$z-index-map:(
+	small-nav-backdrop:99,
+	small-nav-drawer:100,
+	docs-small-nav-backdrop:99,
+	docs-small-nav-drawer:100,
+)

@@ -1,0 +1,167 @@
+@keyframes open-small-nav {
+	0%{
+		right:-290px;
+	}
+	100%{
+		right:0;
+	}
+}
+
+#nav-small-bar{
+	display:none;
+	background-color:map-get($theme-colors, dark);
+	padding:0 1rem;
+	height: $small-nav-height;
+
+	&.docs{
+		justify-content: space-between;
+	}
+
+	&:not(.docs){
+		justify-content: flex-end;
+	}
+}
+
+#nav-small-bar{
+	div{
+		button{
+			height:100%;
+		}
+	}
+}
+
+#nav-small-backdrop{
+	position:fixed;
+	display:none;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,0.35);
+	z-index:map-get($z-index-map, small-nav-backdrop);
+}
+
+#small-nav-docs-drawer-trigger-button{
+	background:none;
+	border:unset;
+	padding:0.15rem;
+	color:white;
+	display:inline-flex;
+	align-items: center;
+	text-decoration: none;
+	span{
+		padding-left:12px;
+	}
+	i {
+		font-size: 36px;
+	}
+}
+
+#small-nav-trigger-button{
+	background:none;
+	border:unset;
+	padding:0.15rem;
+	color:white;
+	display:inline-flex;
+	align-items: center;
+	text-decoration: none;
+	span{
+		padding-right:12px;
+	}
+	i {
+		font-size: 36px;
+	}
+}
+
+#nav-small{
+	display:none;
+	position:absolute;
+	right:0;
+	top:0;
+	max-width:275px;
+	width:275px;
+	background-color:map-get($theme-colors, dark);
+	min-height:100vh;
+	z-index:map-get($z-index-map, small-nav-drawer);
+
+	&.open{
+		animation:open-small-nav 130ms 1;
+		animation-fill-mode: backwards;
+		display:flex;
+		flex-direction:column;
+	}
+
+	.logo-c{
+		text-align:center;
+		border-bottom:1px solid rgba(255,255,255,0.3);
+		padding:1rem;
+		margin: 50px 1rem 1rem;
+	}
+
+	.links{
+		a{
+			color:white;
+			display:block;
+			padding:1rem;
+			text-decoration:none;
+			font-size:1.1rem;
+		}
+	}
+
+	.search-container{
+		padding:1rem;
+	}
+}
+
+#small-nav-search{
+	display: flex;
+	align-items: center;
+
+	#small-nav-search-field-container{
+		display: flex;
+		color: #646464;
+		align-items: center;
+		border-bottom: 1px solid #646464;
+		width:100%;
+
+		&:focus-within{
+			border-bottom-color:$nox-purple;
+		}
+
+		label{
+			padding-right: 8px;
+		}
+
+		input{
+			background: none;
+			border: none;
+			font-size: 1.15rem;
+			color: #646464;
+			flex-grow:1;
+
+			&:focus, &:active{
+				outline: none
+			}
+
+			&:focus{
+				color:$nox-purple;
+			}
+		}
+	}
+}
+
+#small-nav-close-button{
+	background:none;
+	color:white;
+	position:absolute;
+	top:10px;
+	right:10px;
+	border:none;
+	font-size:24px;
+}
+
+@media (max-width:map-get($grid-breakpoints, xl)){
+	#nav-small-bar{
+		display:flex;
+	}
+}

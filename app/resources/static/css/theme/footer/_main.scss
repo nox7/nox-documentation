@@ -1,0 +1,17 @@
+footer{
+	background-color:$footer-bg-color;
+	color:white;
+	padding:1.35rem 1rem 2rem 1rem;
+	text-align:center;
+	p:last-of-type{
+		margin-bottom:0;
+	}
+
+	a{
+		color:$nox-purple;
+		text-decoration: none;
+		&:hover{
+			color:white;
+		}
+	}
+}

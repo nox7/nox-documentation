@@ -1,0 +1,15 @@
+@import "../bootstrap/functions";
+@import "variables";
+@import "../bootstrap/variables";
+
+$theme-colors: map-merge($theme-colors, $custom-theme-colors);
+
+@import "../bootstrap/bootstrap";
+@import "global";
+@import "nav/main";
+@import "footer/main";
+@import "home/main";
+@import "search/main";
+
+// Docs
+@import "docs/main";

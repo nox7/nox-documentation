@@ -1,0 +1,9 @@
+@import "sidebar/main";
+@import "content/main";
+
+#docs-page-container{
+	display:flex;
+	main{
+		width:100%;
+	}
+}
