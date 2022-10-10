@@ -2,6 +2,8 @@
 	namespace NoxDocumentation\Docs;
 
 	use Nox\ClassLoader\ClassLoader;
+	use Nox\Router\Attributes\Route;
+	use Nox\Router\Attributes\RouteBase;
 	use ReflectionMethod;
 
 	class SearchService{
@@ -84,5 +86,63 @@
 			}
 
 			return $methodsThatMatchQuery;
+		}
+
+		/**
+		 * @param ReflectionMethod[] $reflectionMethods
+		 * @return SearchResult[]
+		 * @throws \ReflectionException
+		 */
+		public static function parseQueryResultInSearchResults(array $reflectionMethods): array{
+			$searchResults = [];
+			foreach($reflectionMethods as $reflectionMethod){
+				$routeReflectionAttributes = $reflectionMethod->getAttributes(
+					name: Route::class
+				);
+
+				if (!empty($routeReflectionAttributes)){
+					$routeReflectionAttribute = $routeReflectionAttributes[0];
+					/** @var Route $routeAttribute */
+					$routeAttribute = $routeReflectionAttribute->newInstance();
+
+					// Call the method to get the stringified HTML result
+					$classReflection = new \ReflectionClass($reflectionMethod->class);
+
+					// Check for a route base
+					$routeBaseReflectionAttributes = $classReflection->getAttributes(
+						name: RouteBase::class,
+					);
+
+					$routeBase = "";
+					if (!empty($routeBaseReflectionAttributes)){
+						/** @var RouteBase $routeBaseAttribute */
+						$routeBaseAttribute = $routeBaseReflectionAttributes[0]->newInstance();
+						$routeBase = $routeBaseAttribute->uri;
+					}
+
+					$html = $reflectionMethod->invoke($classReflection->newInstance());
+
+					// Get the title and the description via string matching
+					preg_match(
+						pattern: "/<title>(.*)<\/title>/i",
+						subject:$html,
+						matches:$titleMatches,
+					);
+
+					preg_match(
+						pattern: "/<meta name=\"description\" content=\"(.*)\">/i",
+						subject:$html,
+						matches:$descriptionMatches,
+					);
+
+					$searchResult = new SearchResult();
+					$searchResult->route = $routeBase . $routeAttribute->uri;
+					$searchResult->title = $titleMatches[1];
+					$searchResult->description = $descriptionMatches[1];
+					$searchResults[] = $searchResult;
+				}
+			}
+
+			return $searchResults;
 		}
 	}
