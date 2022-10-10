@@ -78,7 +78,11 @@ class SmallNav{
 	}
 
 	isDocsNavDrawerOpen(){
-		return this.docsSidebar.classList.contains("small-nav-opened");
+		if (this.docsSidebar) {
+			return this.docsSidebar.classList.contains("small-nav-opened");
+		}else{
+			return false;
+		}
 	}
 
 	onDocsDrawerTriggerButtonClicked(){
