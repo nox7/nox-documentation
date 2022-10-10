@@ -11,6 +11,7 @@ $secondary-bg-color:#191c1f;
 $secondary-bg-text-color:#d8c6db;
 
 $primary:darken($nox-purple, 5%);
+$input-group-addon-bg: $secondary-bg-color;
 $input-bg: $main-bg-color;
 $input-color:$main-bg-text-color;
 $input-btn-focus-color: transparentize($nox-purple,0.8);
